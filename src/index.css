@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+.title-font {
+    font-family: 'Orbitron', sans-serif;
+}
+
+.fade {
+    animation-name: fade;
+    animation-duration: 1s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+}
+
+@layer components {
+    .btn {
+        @apply text-sm px-2 py-1 rounded-sm bg-wedgewood-600 hover:bg-wedgewood-800 text-wedgewood-50 transition-all duration-300;
+    }
+}
+
+@keyframes fade {
+    from {
+        filter: opacity(.1);
+    }
+
+    to {
+        filter: opacity(0.05);
+    }
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+  
+/* Track */
+::-webkit-scrollbar-track {
+    background: #747373;
+    border-radius: 5px;
+}
+  
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #ffffff;
+    border-radius: 5px;
+}
+  
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #d8d8d8;
+}
+
+.pulse{
+    animation-name: pulse;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pulse {
+    0%,5%,7%{
+        transform: scale(1);
+    } 4%, 6%{
+        transform: scale(1.2); 
+    }
+}
+
+.animate-drag-left {
+    animation: drag-me-left 1s infinite;
+}
+
+@keyframes drag-me-left {
+    0%, 100% {
+        transform: translateX(-25%);
+        animation-timing-function: cubic-bezier(0.8,0,1,1);
+    }
+    50% {
+        transform: none;
+        animation-timing-function: cubic-bezier(0,0,0.2,1);
+    }
+}
+
+.neon-glow {
+    stroke: #c04bc8d2; /* Neon green color */
+    stroke-width: 4px;
+    filter: drop-shadow(0 0 5px #00ff00); /* Neon glow effect */
+  }
+  
