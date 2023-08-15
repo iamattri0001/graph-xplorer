@@ -73,7 +73,7 @@ const RightMenu = ({
                     <BsArrowBarLeft onClick={() => setIsRightMenuOpen(true)} className='animate-drag-left' />
                 )}
             </div>
-            
+
             <div className='flex flex-col py-5 px-3 items-center justify-center gap-y-10 bg-wedgewood-900 rounded-md'>
                 <div
                     className='flex flex-col gap-y-2'>
@@ -121,7 +121,7 @@ const RightMenu = ({
                     <select
                         onChange={handleAlgoChange}
                         id="selected-algo"
-                        className='bg-wedgewood-200 text-wedgewood-950 w-[136px] px-1 py-1 outline-none cursor-pointer'
+                        className='bg-wedgewood-200 text-wedgewood-950 w-[136px] px-1 py-1 outline-none cursor-pointer rounded-md'
                     >
                         {algorithms.map((algo) => (
                             <option
@@ -134,7 +134,10 @@ const RightMenu = ({
                         ))}
                     </select>
 
-                    <input type="range" step={0.1} max={5} min={0.2} title={`animation delay: ${delay} `} className='appearance-none h-1 w-full bg-gradient-to-r from-wedgewood-100 to-wedgewood-600 rounded-md outline-none thumb:bg-red-500 cursor-pointer' value={delay} onChange={(ev) => setDelay(ev.target.value)} />
+                    <div className='flex items-center justify-center flex-col text-wedgewood-200 gap-y-2'>
+                        <span className='text-sm'>Step Delay</span>
+                        <input type="range" step={0.1} max={5} min={0.2} title={`animation delay: ${delay} `} className='appearance-none h-1 w-full bg-gradient-to-r from-wedgewood-100 to-wedgewood-600 rounded-md outline-none thumb:bg-red-500 cursor-pointer' value={delay} onChange={(ev) => setDelay(ev.target.value)} />
+                    </div>
 
                     <button className='text-center px-3 py-1 text-sm rounded-sm cursor-pointer transition-all duration-100 border hover:bg-wedgewood-500 hover:text-wedgewood-100 border-wedgewood-300 text-wedgewood-300' id='run-btn' onClick={runAlgorithm}>Visualize</button>
                 </div>
@@ -144,7 +147,7 @@ const RightMenu = ({
                 </div>
 
                 <div className='flex items-center justify-center gap-x-3'>
-                    <button onClick={() => setInputMenuOpen(true)}>
+                    <button onClick={() => setInputMenuOpen(true)} title='Build from input'>
                         <AiOutlineFileText className='text-3xl inline text-wedgewood-50 cursor-pointer hover:scale-110 transition-all hover:text-wedgewood-400' />
                     </button>
 
