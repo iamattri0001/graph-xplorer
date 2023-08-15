@@ -2,7 +2,7 @@ import React from 'react'
 import Home from './Components/Home'
 import toast, { Toaster } from 'react-hot-toast';
 import toastSettings from './utils/toastSettings';
-import MobilePrompt from './Components/MobilePrompt';
+import MobilePrompt from './Components/UI/MobilePrompt';
 import { useMediaQuery } from 'react-responsive';
 
 const App = () => {

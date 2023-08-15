@@ -1,5 +1,5 @@
 import React from 'react'
-import textInputHandler from '../utils/handlers/textInputHandler';
+import textInputHandler from './../../utils/handlers/textInputHandler';
 
 const TextInputMenu = ({nodes, setNodes, edges,  setEdges, setIsDirected, showMessage }) => {
 

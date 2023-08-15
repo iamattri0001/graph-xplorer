@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { algorithms, killAnimation } from '../utils/graphAlgos';
+import { algorithms, killAnimation } from './../../utils/graphAlgos';
 import { MdOutlineLiveHelp } from 'react-icons/md';
 import { BsArrowBarLeft } from 'react-icons/bs';
 import { IoCloseOutline } from 'react-icons/io5';

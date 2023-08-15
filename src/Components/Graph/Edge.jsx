@@ -1,6 +1,6 @@
-import EdgeArrow from "./EdgeArrow"
+import Arrow from "./Arrow"
 
-const GrapEdge = ({ from, to, isWeighted, isDirected, fromName, toName }) => {
+const Edge = ({ from, to, isWeighted, isDirected, fromName, toName, nodeSize }) => {
     return (
         <g className='edge stroke-edge' datafrom={fromName} datato={toName}>
 
@@ -9,7 +9,7 @@ const GrapEdge = ({ from, to, isWeighted, isDirected, fromName, toName }) => {
                 y1={from.y}
                 x2={to.x}
                 y2={to.y}
-                strokeWidth={1}
+                strokeWidth={1.3}
             />
 
             {isWeighted && <text
@@ -21,11 +21,11 @@ const GrapEdge = ({ from, to, isWeighted, isDirected, fromName, toName }) => {
             </text>}
 
             {isDirected &&
-                <EdgeArrow from={from} to={to} />
+                <Arrow from={from} to={to} nodeSize={nodeSize} />
             }
         </g>
 
     )
 }
 
-export default GrapEdge
+export default Edge

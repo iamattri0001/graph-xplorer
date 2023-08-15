@@ -4,10 +4,10 @@ import { BsArrowBarRight } from 'react-icons/bs';
 import { IoCloseOutline } from 'react-icons/io5';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 
-import nodeActionHandler from '../utils/handlers/nodeActionHandler';
-import edgeActionHandler from '../utils/handlers/edgeActionHandler';
+import nodeActionHandler from '../../utils/handlers/nodeActionHandler';
+import edgeActionHandler from '../../utils/handlers/edgeActionHandler';
 
-const LeftMenu = ({ nodes, edges, setEdges, setNodes, isDirected, showMessage, setNodeSize }) => {
+const LeftMenu = ({ nodes, edges, setEdges, setNodes, isDirected, showMessage, setNodeSize, nodeSize}) => {
     const [isOpen, setIsOpen] = useState(true);
 
 
@@ -57,14 +57,15 @@ const LeftMenu = ({ nodes, edges, setEdges, setNodes, isDirected, showMessage, s
             className={`floating-menu absolute h-screen flex items-center justify-center ${isOpen ? `left-5` : `left-[-194px]`} transition-all duration-200 gap-x-2`}>
 
             <div className=' text-wedgewood-50 flex flex-col items-center justify-center gap-y-7'>
-                <div className='bg-wedgewood-900 w-full flex flex-col gap-y-2 items-center justify-center py-3'>
+                <div className='bg-wedgewood-900 w-full flex flex-col gap-y-2 items-center justify-center py-3 rounded-md'>
                     <span className='text-wedgewood-200'>
                         Vertex Size
                     </span>
-                    <input type="range" id="node-size-controller" max={2.5} min={1} step={0.1} onChange={(ev) => setNodeSize(ev.target.value)} defaultValue={2} className='appearance-none h-1 w-[75%] bg-gradient-to-r from-wedgewood-100 to-wedgewood-600 rounded-md outline-none thumb:bg-red-500 cursor-pointer' />
+                    <input type="range" id="node-size-controller" max={2} min={1} step={0.1} onChange={(ev) => setNodeSize(ev.target.value)} value={nodeSize} className='appearance-none h-1 w-[75%] bg-gradient-to-r from-wedgewood-100 to-wedgewood-600 rounded-md outline-none thumb:bg-red-500 cursor-pointer' />
                 </div>
+
                 <form
-                    className='flex items-center justify-center gap-y-2 flex-col bg-wedgewood-900 w-full px-5 py-3'
+                    className='flex items-center justify-center gap-y-2 flex-col bg-wedgewood-900 w-full px-5 py-3 rounded-md'
                     onSubmit={(ev) => { ev.preventDefault() }}>
 
                     <input
@@ -94,7 +95,7 @@ const LeftMenu = ({ nodes, edges, setEdges, setNodes, isDirected, showMessage, s
                     </div>
                 </form>
 
-                <form className='flex items-center gap-y-2 flex-col bg-wedgewood-900 w-full px-5 py-3'>
+                <form className='flex items-center gap-y-2 flex-col bg-wedgewood-900 w-full px-5 py-3 rounded-md'>
                     <div className='flex items-center flex-col justify-center gap-x-3'>
 
                         <input

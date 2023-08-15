@@ -5,6 +5,7 @@ const findComps = (nodes, edges, isDirected, showMessage) => {
         showMessage('Number of components are not defined for directed graph.')
         return -1;
     }
+    
     const adjList = createUnweightedGraph(nodes, edges, isDirected);
     let vis = new Set();
     let comps = 0;

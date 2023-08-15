@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import GraphNode from './GraphNode';
-import GrapEdge from './GrapEdge';
+import Node from './Graph/Node';
+import Edge from './Graph/Edge';
 
 const Graph = ({ nodes, edges, setNodes, isDirected, isWeighted, nodeSize }) => {
 
@@ -27,36 +27,39 @@ const Graph = ({ nodes, edges, setNodes, isDirected, isWeighted, nodeSize }) => 
 
 
     return (
-        <svg className='flex-grow w-screen select-none'>
-            <g>
-                {
-                    edges.map((edge, i) =>
-                        <GrapEdge
-                            key={i}
-                            from={{ x: nodes[edge.from].x, y: nodes[edge.from].y }}
-                            to={{ x: nodes[edge.to].x, y: nodes[edge.to].y }}
-                            fromName={edge.from}
-                            toName={edge.to}
-                            type={edge.type}
-                            isWeighted={isWeighted}
-                            isDirected={isDirected}
-                        />)
-                }
+        <div className='flex-grow w-screen'>
+            <svg className='h-full w-full select-none'>
+                <g>
+                    {
+                        edges.map((edge, i) =>
+                            <Edge
+                                key={i}
+                                from={{ x: nodes[edge.from].x, y: nodes[edge.from].y }}
+                                to={{ x: nodes[edge.to].x, y: nodes[edge.to].y }}
+                                fromName={edge.from}
+                                toName={edge.to}
+                                type={edge.type}
+                                isWeighted={isWeighted}
+                                isDirected={isDirected}
+                                nodeSize={nodeSize}
+                            />)
+                    }
 
-                {
-                    Object.entries(nodes).map(([name, node]) =>
-                        <GraphNode
-                            key={name}
-                            name={name}
-                            x={node.x}
-                            y={node.y}
-                            handlePositionChange={handlePositionChange}
-                            nodeSize={nodeSize}
-                        />
-                    )
-                }
-            </g>
-        </svg>
+                    {
+                        Object.entries(nodes).map(([name, node]) =>
+                            <Node
+                                key={name}
+                                name={name}
+                                x={node.x}
+                                y={node.y}
+                                handlePositionChange={handlePositionChange}
+                                nodeSize={nodeSize}
+                            />
+                        )
+                    }
+                </g>
+            </svg>
+        </div>
     )
 }
 

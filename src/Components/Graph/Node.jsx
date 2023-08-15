@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const GraphNode = ({ name, x, y, handlePositionChange, nodeSize }) => {
+const Node = ({ name, x, y, handlePositionChange, nodeSize }) => {
     const [isDragging, setIsDragging] = useState(false);
     const [position, setPosition] = useState({ x, y });
 
@@ -64,11 +64,11 @@ const GraphNode = ({ name, x, y, handlePositionChange, nodeSize }) => {
             className="text-dark"
         >
             <circle
-                className={`node fill-node ${isDragging ? 'cursor-grabbing' : 'cursor-grab'} `}
-                r={18 * nodeSize}
+                className={`node fill-node stroke-wedgewood-100 ${isDragging ? 'cursor-grabbing' : 'cursor-grab'} `}
+                r={20 * nodeSize}
                 cx={position.x}
                 cy={position.y}
-                strokeWidth={2}
+                strokeWidth={1.5}
                 dataname={name}
                 style={{ filter: 'drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3))' }}
             />
@@ -79,7 +79,7 @@ const GraphNode = ({ name, x, y, handlePositionChange, nodeSize }) => {
                 textAnchor="middle"
                 dominantBaseline="middle"
                 fill="currentColor"
-                fontSize="18"
+                fontSize="19"
             >
                 {name.slice(0, 4)}
             </text>
@@ -88,4 +88,4 @@ const GraphNode = ({ name, x, y, handlePositionChange, nodeSize }) => {
     );
 };
 
-export default GraphNode;
+export default Node;

@@ -1,7 +1,6 @@
 import React from 'react';
 
-const EdgeArrow = ({ from, to }) => {
-
+const Arrow = ({ from, to, nodeSize }) => {
     function calculatePointOnLine(x1, y1, x2, y2, a) {
 
         let dx, dy;
@@ -24,7 +23,6 @@ const EdgeArrow = ({ from, to }) => {
         const x3 = x2 - dx;
         const y3 = y2 - dy;
 
-        // Return the coordinates as an object
         return { x: x3, y: y3 };
     }
 
@@ -78,16 +76,15 @@ const EdgeArrow = ({ from, to }) => {
     const y1 = from.y;
     const x2 = to.x;
     const y2 = to.y;
-    const distance = 30; //equals the radius of circle of node
-
+    const distance = nodeSize * 20; //equals the radius of circle of node
     const pointOnLine = calculatePointOnLine(x1, y1, x2, y2, distance);
 
-    const pointOfPerpendicular = calculatePointOnLine(x1, y1, x2, y2, distance + 20);
+    const pointOfPerpendicular = calculatePointOnLine(x1, y1, x2, y2, distance + distance / 2);
 
     const pointsP = findPointP(pointOfPerpendicular, x1, y1, x2, y2, 10);
 
     return (
-        <g className='stroke-edge'>
+        <g className='stroke-inherit'>
             <line
                 className='stroke-inherit'
                 x1={pointsP[0].x}
@@ -95,7 +92,7 @@ const EdgeArrow = ({ from, to }) => {
 
                 x2={pointOnLine.x}
                 y2={pointOnLine.y}
-                strokeWidth={2}
+                strokeWidth={1.3}
             />
             <line
                 className='stroke-inherit'
@@ -104,10 +101,10 @@ const EdgeArrow = ({ from, to }) => {
 
                 x2={pointOnLine.x}
                 y2={pointOnLine.y}
-                strokeWidth={2}
+                strokeWidth={1.3}
             />
         </g>
     );
 };
 
-export default EdgeArrow;
+export default Arrow;

@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 
-import RightMenu from './RightMenu';
-import Navbar from './Navbar';
+import RightMenu from './UI/RightMenu';
+import Navbar from './UI/Navbar';
 import Graph from './Graph';
-import Help from './Help';
-import Modal from './Modal';
-import TextInputMenu from './TextInputMenu';
-import LeftMenu from './LeftMenu';
+import Help from './UI/Help';
+import Modal from './UI/Modal';
+import TextInputMenu from './UI/TextInputMenu';
+import LeftMenu from './UI/LeftMenu';
 
 const Home = ({ showMessage }) => {
 
     const [nodes, setNodes] = useState({});
 
-    const [nodeSize, setNodeSize] = useState(2);
+    const [nodeSize, setNodeSize] = useState(1.5);
 
     const [edges, setEdges] = useState([]);
 
@@ -79,6 +79,7 @@ const Home = ({ showMessage }) => {
                 setNodes={setNodes}
                 isDirected={isDirected}
                 showMessage={showMessage}
+                nodeSize={nodeSize}
                 setNodeSize={setNodeSize}
             />
             {isHelpOpen &&
