@@ -29,7 +29,7 @@ const Help = () => {
 
                 <div className='ml-5'>
                     <h3 className='text-2xl'>Weight Scale Adjustment</h3>
-                    <p>Scale of weight of edges (which is basically the distance betweeen the vertices) can be asjusted via this slider.</p>
+                    <p>Scale of weight (which is basically the distance betweeen the vertices) can be adjusted via this slider.</p>
                 </div>
             </div>
 
