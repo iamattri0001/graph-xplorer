@@ -1,6 +1,7 @@
 import Arrow from "./Arrow"
 
-const Edge = ({ from, to, isWeighted, isDirected, fromName, toName, nodeSize }) => {
+const Edge = ({ from, to, isWeighted, isDirected, fromName, toName, nodeSize, weightfactor}) => {
+    console.log(weightfactor);
     return (
         <g className='edge stroke-edge' datafrom={fromName} datato={toName}>
 
@@ -13,11 +14,11 @@ const Edge = ({ from, to, isWeighted, isDirected, fromName, toName, nodeSize }) 
             />
 
             {isWeighted && <text
-                className='stroke-none fill-wedgewood-50 text-sm'
+                className='stroke-none fill-wedgewood-50 text-md'
                 x={(from.x + to.x) / 2 + 5}
                 y={(from.y + to.y) / 2 - 10}>
 
-                {Math.ceil(Math.sqrt(Math.pow(from.x - to.x, 2) + Math.pow(from.y - to.y, 2)) / 10)}
+                {Math.ceil((Math.sqrt(Math.pow(from.x - to.x, 2) + Math.pow(from.y - to.y, 2)) / 10) * weightfactor)}
             </text>}
 
             {isDirected &&

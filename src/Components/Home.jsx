@@ -23,6 +23,8 @@ const Home = ({ showMessage }) => {
 
     const [inputMenuOpen, setInputMenuOpen] = useState(false);
 
+    const [weightFactor, setWeightFactor] = useState(1);
+
     useEffect(() => {
         if (localStorage.getItem('graph')) {
             const { nodes, edges } = JSON.parse(localStorage.getItem('graph'));
@@ -70,6 +72,7 @@ const Home = ({ showMessage }) => {
                 isWeighted={isWeighted}
                 showMessage={showMessage}
                 nodeSize={nodeSize}
+                weightFactor={weightFactor}
             />
 
             <LeftMenu
@@ -81,6 +84,8 @@ const Home = ({ showMessage }) => {
                 showMessage={showMessage}
                 nodeSize={nodeSize}
                 setNodeSize={setNodeSize}
+                weightFactor={weightFactor}
+                setWeightFactor={setWeightFactor}
             />
             {isHelpOpen &&
                 <Modal openCloseHandler={setIsHelpOpen} openOrClose={isHelpOpen}>

@@ -7,7 +7,16 @@ import { AiOutlineArrowRight } from 'react-icons/ai';
 import nodeActionHandler from '../../utils/handlers/nodeActionHandler';
 import edgeActionHandler from '../../utils/handlers/edgeActionHandler';
 
-const LeftMenu = ({ nodes, edges, setEdges, setNodes, isDirected, showMessage, setNodeSize, nodeSize}) => {
+const LeftMenu = ({
+    nodes,
+    edges,
+    setEdges,
+    setNodes,
+    isDirected,
+    showMessage,
+    setNodeSize, nodeSize,
+    weightFactor,
+    setWeightFactor }) => {
     const [isOpen, setIsOpen] = useState(true);
 
 
@@ -57,11 +66,21 @@ const LeftMenu = ({ nodes, edges, setEdges, setNodes, isDirected, showMessage, s
             className={`floating-menu absolute h-screen flex items-center justify-center ${isOpen ? `left-5` : `left-[-194px]`} transition-all duration-200 gap-x-2`}>
 
             <div className=' text-wedgewood-50 flex flex-col items-center justify-center gap-y-7'>
-                <div className='bg-wedgewood-900 w-full flex flex-col gap-y-2 items-center justify-center py-3 rounded-md'>
-                    <span className='text-wedgewood-200'>
-                        Vertex Size
-                    </span>
-                    <input type="range" id="node-size-controller" max={2} min={1} step={0.1} onChange={(ev) => setNodeSize(ev.target.value)} value={nodeSize} className='appearance-none h-1 w-[75%] bg-gradient-to-r from-wedgewood-100 to-wedgewood-600 rounded-md outline-none thumb:bg-red-500 cursor-pointer' />
+                <div className='bg-wedgewood-900 w-full py-4 flex flex-col gap-y-5 items-center justify-center rounded-md'>
+
+                    <div className='flex flex-col w-full items-center justify-center gap-y-2'>
+                        <span className='text-wedgewood-200 text-sm'>
+                            Vertex Size
+                        </span>
+                        <input type="range" id="node-size-controller" max={2} min={1} step={0.1} onChange={(ev) => setNodeSize(ev.target.value)} value={nodeSize} className='appearance-none h-1 w-[75%] bg-gradient-to-r from-wedgewood-100 to-wedgewood-600 rounded-md outline-none cursor-pointer' />
+                    </div>
+
+                    <div className='flex flex-col w-full items-center justify-center gap-y-2'>
+                        <span className='text-wedgewood-200 text-sm'>
+                            Weight Scale
+                        </span>
+                        <input type="range" id="weight-scale-controller" max={10} min={0.1} step={0.1} onChange={(ev) => setWeightFactor(ev.target.value)} value={weightFactor} className='appearance-none h-1 w-[75%] bg-gradient-to-r from-wedgewood-100 to-wedgewood-600 rounded-md outline-none cursor-pointer' />
+                    </div>
                 </div>
 
                 <form

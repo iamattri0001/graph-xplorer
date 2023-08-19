@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import Node from './Graph/Node';
 import Edge from './Graph/Edge';
 
-const Graph = ({ nodes, edges, setNodes, isDirected, isWeighted, nodeSize }) => {
+const Graph = ({ nodes, edges, setNodes, isDirected, isWeighted, nodeSize, weightFactor}) => {
 
     const handlePositionChange = (name, x, y) => {
         const node = nodes[name];
@@ -16,6 +16,7 @@ const Graph = ({ nodes, edges, setNodes, isDirected, isWeighted, nodeSize }) => 
             }));
         }
     }
+    
     useEffect(() => {
         if (Object.keys(nodes).length) {
             localStorage.setItem('graph', JSON.stringify({
@@ -42,6 +43,7 @@ const Graph = ({ nodes, edges, setNodes, isDirected, isWeighted, nodeSize }) => 
                                 isWeighted={isWeighted}
                                 isDirected={isDirected}
                                 nodeSize={nodeSize}
+                                weightfactor={weightFactor}
                             />)
                     }
 
