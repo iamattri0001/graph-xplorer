@@ -63,6 +63,7 @@ const Home = ({ showMessage }) => {
                 handleResetGraph={handleResetGraph}
                 setIsHelpOpen={setIsHelpOpen}
                 setInputMenuOpen={setInputMenuOpen}
+                weightFactor={weightFactor}
             />
             <Graph
                 nodes={nodes}

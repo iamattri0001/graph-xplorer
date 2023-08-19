@@ -15,7 +15,8 @@ const RightMenu = ({
     handleResetGraph,
     showMessage,
     setIsHelpOpen,
-    setInputMenuOpen }) => {
+    setInputMenuOpen,
+    weightFactor }) => {
 
     const [lastExec, setLastExec] = useState(2);
     const [animation, setAnimation] = useState(null);
@@ -54,7 +55,7 @@ const RightMenu = ({
 
         const algoId = document.getElementById('selected-algo').value;
 
-        const animation = algorithms[algoId].algo(nodes, edges, isDirected, showMessage, delay * 1000);
+        const animation = algorithms[algoId].algo(nodes, edges, isDirected, showMessage, delay * 1000, weightFactor);
 
         setLastExec(algoId);
         setAnimation(animation);
@@ -136,7 +137,7 @@ const RightMenu = ({
 
                     <div className='flex items-center justify-center flex-col text-wedgewood-200 gap-y-2'>
                         <span className='text-sm'>Step Delay</span>
-                        <input type="range" step={0.1} max={5} min={0.2} title={`animation delay: ${delay} `} className='appearance-none h-1 w-full bg-gradient-to-r from-wedgewood-100 to-wedgewood-600 rounded-md outline-none thumb:bg-red-500 cursor-pointer' value={delay} onChange={(ev) => setDelay(ev.target.value)} />
+                        <input type="range" step={0.1} max={5} min={0.2} title={`animation delay: ${delay} `} className='appearance-none h-1 w-full bg-gradient-to-r from-wedgewood-100 to-wedgewood-600 rounded-md outline-none thumb:bg-red-500 cursor-pointer' value={delay} onChange={(ev) => { setDelay(ev.target.value); killAnimation(lastExec, animation) }} />
                     </div>
 
                     <button className='text-center px-3 py-1 text-sm rounded-sm cursor-pointer transition-all duration-100 border hover:bg-wedgewood-500 hover:text-wedgewood-100 border-wedgewood-300 text-wedgewood-300' id='run-btn' onClick={runAlgorithm}>Visualize</button>

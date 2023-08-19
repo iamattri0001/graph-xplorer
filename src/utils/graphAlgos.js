@@ -10,9 +10,11 @@ import topoSort from "./algorithms/topoSort";
 import dijsktra from "./algorithms/dijsktra";
 
 //to stop animations
+
 export const killAnimation = (algoId, animation) => {
     if (['0', '1', '2', '3', '7', '8'].includes(algoId)) {
         stopGlow(animation);
+        stopFadeEdges();
     } else {
         stopFadeEdges();
         stopFadeNodes();

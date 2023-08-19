@@ -10,7 +10,7 @@ const lessThan = (pair1, pair2) => {
     return pair1[1] < pair2[2];
 }
 
-const dijsktra = (nodes, edges, isDirected, showMessage, delay) => {
+const dijsktra = (nodes, edges, isDirected, showMessage, delay, weightFactor) => {
     let source, dest;
     source = prompt("Enter the source vertex: ");
     if (!nodes[source]) {
@@ -23,7 +23,7 @@ const dijsktra = (nodes, edges, isDirected, showMessage, delay) => {
         return;
     }
 
-    const adjList = createWeightedGraph(nodes, edges, isDirected);
+    const adjList = createWeightedGraph(nodes, edges, isDirected, weightFactor);
     const heap = new MinHeap(greaterThan, lessThan);
 
     let dist = {};

@@ -26,6 +26,11 @@ const Help = () => {
                     <h3 className='text-2xl'>Vertex Size Adjustment</h3>
                     <p>Size of vertex can be adjusted via this slider.</p>
                 </div>
+
+                <div className='ml-5'>
+                    <h3 className='text-2xl'>Weight Scale Adjustment</h3>
+                    <p>Scale of weight of edges (which is basically the distance betweeen the vertices) can be asjusted via this slider.</p>
+                </div>
             </div>
 
             <div className='flex items-start justify-center gap-y-4 flex-col'>

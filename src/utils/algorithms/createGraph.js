@@ -16,7 +16,7 @@ export const createUnweightedGraph = (nodes, edges, isDirected) => {
     return list;
 }
 
-export const createWeightedGraph = (nodes, edges, isDirected) => {
+export const createWeightedGraph = (nodes, edges, isDirected, weightFactor = 1) => {
     let list = {};
     Object.keys(nodes).forEach(node => {
         list[node] = [];
@@ -27,7 +27,7 @@ export const createWeightedGraph = (nodes, edges, isDirected) => {
         const fromNode = nodes[from];
         const toNode = nodes[to];
 
-        const weight = Math.ceil(Math.sqrt(Math.pow(fromNode.x - toNode.x, 2) + Math.pow(fromNode.y - toNode.y, 2)) / 10);
+        const weight = Math.ceil((Math.sqrt(Math.pow(fromNode.x - toNode.x, 2) + Math.pow(fromNode.y - toNode.y, 2)) / 10) * weightFactor);
 
         list[from].push([to, weight]);
 

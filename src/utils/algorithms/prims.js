@@ -2,13 +2,13 @@ import { createWeightedGraph } from './createGraph';
 import { MinHeap } from '../structures/heap';
 import { glowNodes, highlightPath } from '../animate';
 
-const prims = (nodes, edges, isDirected, showMessage, delay) => {
+const prims = (nodes, edges, isDirected, showMessage, delay, weightFactor) => {
     if (isDirected) {
         showMessage("MST is not defined for directed graphs!", "error");
         return;
     }
 
-    const adjList = createWeightedGraph(nodes, edges, false);
+    const adjList = createWeightedGraph(nodes, edges, false, weightFactor);
 
     const startNode = Object.keys(nodes)[0];
 
@@ -49,7 +49,7 @@ const prims = (nodes, edges, isDirected, showMessage, delay) => {
         }
     }
 
-    if(included.size !== Object.keys(nodes).length){
+    if (included.size !== Object.keys(nodes).length) {
         showMessage('MST is not defined for disconnected graphs!', 'error');
         return;
     }
