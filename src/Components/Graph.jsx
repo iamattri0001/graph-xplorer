@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import Node from './Graph/Node';
 import Edge from './Graph/Edge';
 
-const Graph = ({ nodes, edges, setNodes, isDirected, isWeighted, nodeSize, weightFactor}) => {
+const Graph = ({ nodes, edges, setNodes, isDirected, isWeighted, nodeSize, weightFactor }) => {
 
     const handlePositionChange = (name, x, y) => {
         const node = nodes[name];
@@ -16,16 +16,15 @@ const Graph = ({ nodes, edges, setNodes, isDirected, isWeighted, nodeSize, weigh
             }));
         }
     }
-    
+
     useEffect(() => {
         if (Object.keys(nodes).length) {
-            localStorage.setItem('graph', JSON.stringify({
+            localStorage.setItem('graph-working', JSON.stringify({
                 nodes,
                 edges
             }));
         }
     }, [nodes, edges]);
-
 
     return (
         <div className='flex-grow w-screen'>

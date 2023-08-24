@@ -1,7 +1,6 @@
 import Arrow from "./Arrow"
 
-const Edge = ({ from, to, isWeighted, isDirected, fromName, toName, nodeSize, weightfactor}) => {
-    console.log(weightfactor);
+const Edge = ({ from, to, isWeighted, isDirected, fromName, toName, nodeSize, weightfactor }) => {
     return (
         <g className='edge stroke-edge' datafrom={fromName} datato={toName}>
 

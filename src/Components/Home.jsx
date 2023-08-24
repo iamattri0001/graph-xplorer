@@ -3,42 +3,28 @@ import React, { useState, useEffect } from 'react';
 import RightMenu from './UI/RightMenu';
 import Navbar from './UI/Navbar';
 import Graph from './Graph';
-import Help from './UI/Help';
-import Modal from './UI/Modal';
-import TextInputMenu from './UI/TextInputMenu';
 import LeftMenu from './UI/LeftMenu';
 
 const Home = ({ showMessage }) => {
 
     const [nodes, setNodes] = useState({});
+    const [edges, setEdges] = useState([]);
 
     const [nodeSize, setNodeSize] = useState(1.5);
-
-    const [edges, setEdges] = useState([]);
 
     const [isWeighted, setIsWeighted] = useState(false);
     const [isDirected, setIsDirected] = useState(false);
 
-    const [isHelpOpen, setIsHelpOpen] = useState(false);
-
-    const [inputMenuOpen, setInputMenuOpen] = useState(false);
-
     const [weightFactor, setWeightFactor] = useState(1);
 
     useEffect(() => {
-        if (localStorage.getItem('graph')) {
-            const { nodes, edges } = JSON.parse(localStorage.getItem('graph'));
+        if (localStorage.getItem('graph-working')) {
+            const { nodes, edges } = JSON.parse(localStorage.getItem('graph-working'));
             setEdges(edges);
             setNodes(nodes);
         }
     }, []);
 
-    const handleResetGraph = () => {
-        localStorage.removeItem('graph');
-        setEdges([]);
-        setNodes({});
-        showMessage('Graph has been reset', 'success');
-    }
     return (
         <div className='bg-wedgewood-950 min-h-screen relative md:overflow-hidden flex'>
 
@@ -58,11 +44,10 @@ const Home = ({ showMessage }) => {
                 isDirected={isDirected}
                 isWeighted={isWeighted}
                 nodes={nodes}
+                setNodes={setNodes}
+                setEdges={setEdges}
                 edges={edges}
                 showMessage={showMessage}
-                handleResetGraph={handleResetGraph}
-                setIsHelpOpen={setIsHelpOpen}
-                setInputMenuOpen={setInputMenuOpen}
                 weightFactor={weightFactor}
             />
             <Graph
@@ -88,24 +73,6 @@ const Home = ({ showMessage }) => {
                 weightFactor={weightFactor}
                 setWeightFactor={setWeightFactor}
             />
-            {isHelpOpen &&
-                <Modal openCloseHandler={setIsHelpOpen} openOrClose={isHelpOpen}>
-                    <Help />
-                </Modal>
-            }
-
-            {inputMenuOpen &&
-                <Modal openCloseHandler={setInputMenuOpen} openOrClose={inputMenuOpen}>
-                    <TextInputMenu
-                        nodes={nodes}
-                        setNodes={setNodes}
-                        edges={edges}
-                        setEdges={setEdges}
-                        setIsDirected={setIsDirected}
-                        showMessage={showMessage} />
-                </Modal>}
-
-            <Modal />
         </div >
     )
 }
