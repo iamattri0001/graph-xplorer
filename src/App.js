@@ -6,15 +6,15 @@ import MobilePrompt from './Components/UI/MobilePrompt';
 import { useMediaQuery } from 'react-responsive';
 
 const App = () => {
-  const showMessage = (message, type) => {
+  const showMessage = (message, type, duration = 3000) => {
     if (type === 'info') {
       toast(message, toastSettings);
     } else if (type === 'error') {
       toast.error(message, toastSettings);
     } else if (type === 'success') {
-      toast.success(message, toastSettings,);
+      toast.success(message, toastSettings);
     } else if (type === 'loading') {
-      const toastId = toast.loading(message, toastSettings);
+      const toastId = toast.loading(message, { ...toastSettings, duration });
       return toastId;
     } else {
       toast(message, toastSettings);

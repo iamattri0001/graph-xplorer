@@ -10,7 +10,10 @@ const LoadGraph = ({ setIsLoadOpen, isLoadOpen, setEdges, setNodes, allGraphs, s
             <form className='bg-wedgewood-500 w-[16rem] h-[6rem] rounded-md flex items-center justify-center gap-x-2' onSubmit={(ev) => {
                 ev.preventDefault();
                 loadGraphHandler(setNodes, setEdges, document.getElementById('selected-name').value, allGraphs);
-                showMessage('Graph loaded!', 'success');
+                showMessage('Please wait..', 'loading', 2000);
+                setTimeout(() => {
+                    showMessage('Graph Loaded!', 'success');
+                }, 2000)
                 setIsLoadOpen(false);
 
             }}>

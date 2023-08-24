@@ -2,6 +2,20 @@ const nodeActionHandler = (nodeAction, nodes, setNodes, edges, setEdges, showMes
     let name;
     if (givenName) {
         name = givenName;
+        const paddingX = 0.2 * window.innerWidth;
+        const paddingY = 0.2 * window.innerHeight;
+        const node = {
+            name: name,
+            x: Math.random() * Math.random() * (window.innerWidth - 2 * paddingX) + paddingX,
+            y: Math.random() * Math.random() * (window.innerHeight - 2 * paddingY) + paddingY
+        }
+
+        setNodes(prevState => ({
+            ...prevState,
+            [name]: node
+        }));
+
+        return true;
     } else {
         name = document.getElementById('node-name').value;
     }

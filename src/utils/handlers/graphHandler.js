@@ -25,16 +25,21 @@ export const resetGraphHandler = (setNodes, setEdges, showMessage) => {
 }
 
 export const loadGraphHandler = (setNodes, setEdges, name, allGraphs) => {
+    let selectedGraph = null;
+    setEdges([]);
+    setNodes({});
+
     for (let i = 0; i < allGraphs.length; i++) {
         if (allGraphs[i].name === name) {
-            setEdges([]);
-            setEdges(allGraphs[i].edges);
-
-            setNodes({});
-            setNodes(allGraphs[i].nodes);
-            return;
+            selectedGraph = allGraphs[i];
+            break;
         }
     }
+
+    setTimeout(() => {
+        setNodes(selectedGraph.nodes);
+        setEdges(selectedGraph.edges);
+    }, 2000);
 }
 
 export const deleteGraphHandler = (name, allGraphs) => {
