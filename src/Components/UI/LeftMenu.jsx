@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react'
 import { BsArrowBarRight } from 'react-icons/bs';
 import { IoCloseOutline } from 'react-icons/io5';
@@ -6,7 +5,7 @@ import { AiOutlineArrowRight } from 'react-icons/ai';
 
 import nodeActionHandler from '../../utils/handlers/nodeActionHandler';
 import edgeActionHandler from '../../utils/handlers/edgeActionHandler';
-import { resetGraphHandler } from '../../utils/handlers/graphHandler';
+import { resetGraphHandler, randomizeGraphHandler } from '../../utils/handlers/graphHandler';
 import SaveGraph from './SaveGraph';
 import LoadGraph from './LoadGraph';
 import DeleteGraph from './DeleteGraph';
@@ -181,21 +180,28 @@ const LeftMenu = ({
                         </div>
                     </form>
 
-                    <form className='bg-wedgewood-900 w-full py-4 flex gap-x-3 items-center justify-center rounded-md' onSubmit={(ev) => {
-                        ev.preventDefault();
-                        graphHandler(document.getElementById('graph-action').value);
-                    }}>
-                        <select id="graph-action" className='bg-wedgewood-200 text-wedgewood-950 w-[116px] px-1 py-1 outline-none text-sm cursor-pointer rounded-md'>
-                            <option value="reset">Reset Graph</option>
-                            <option value="save">Save Graph</option>
-                            {allGraphs.length && <option value="load">Load Graph</option>}
-                            {allGraphs.length && <option value="delete">Delete Graph</option>}
-                        </select>
-                        <button
-                            className='btn'>
-                            <AiOutlineArrowRight className='inline text-lg' />
-                        </button>
-                    </form>
+                    <div className='bg-wedgewood-900 w-full py-4 flex flex-col gap-y-6 items-center justify-center rounded-md'>
+
+                        <form className='flex items-center justify-center gap-x-3' onSubmit={(ev) => {
+                            ev.preventDefault();
+                            graphHandler(document.getElementById('graph-action').value);
+                        }}>
+                            <select id="graph-action" className='bg-wedgewood-200 text-wedgewood-950 w-[116px] px-1 py-1 outline-none text-sm cursor-pointer rounded-md'>
+                                <option value="reset">Reset Graph</option>
+                                <option value="save">Save Graph</option>
+                                {allGraphs.length && <option value="load">Load Graph</option>}
+                                {allGraphs.length && <option value="delete">Delete Graph</option>}
+                            </select>
+                            <button
+                                className='btn'>
+                                <AiOutlineArrowRight className='inline text-lg' />
+                            </button>
+                        </form>
+
+                        <button className='btn-secondary' onClick={() => {
+                            randomizeGraphHandler(nodes, setNodes);
+                        }}>Randomize</button>
+                    </div>
                 </div>
                 <div className='text-wedgewood-100 text-3xl cursor-pointer menu-switch'>
                     {isOpen ? (

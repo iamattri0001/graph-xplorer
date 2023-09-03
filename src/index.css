@@ -19,6 +19,10 @@
     .btn {
         @apply text-sm px-2 py-1 rounded-sm bg-wedgewood-600 hover:bg-wedgewood-800 text-wedgewood-50 transition-all duration-300;
     }
+
+    .btn-secondary {
+        @apply bg-transparent text-sm border border-wedgewood-300 text-wedgewood-300 hover:bg-wedgewood-400 hover:text-wedgewood-50 transition-all px-4 py-2 rounded-md;
+    }
 }
 
 @keyframes fade {

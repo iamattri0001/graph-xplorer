@@ -26,8 +26,6 @@ export const resetGraphHandler = (setNodes, setEdges, showMessage) => {
 
 export const loadGraphHandler = (setNodes, setEdges, name, allGraphs) => {
     let selectedGraph = null;
-    setEdges([]);
-    setNodes({});
 
     for (let i = 0; i < allGraphs.length; i++) {
         if (allGraphs[i].name === name) {
@@ -36,10 +34,8 @@ export const loadGraphHandler = (setNodes, setEdges, name, allGraphs) => {
         }
     }
 
-    setTimeout(() => {
-        setNodes(selectedGraph.nodes);
-        setEdges(selectedGraph.edges);
-    }, 2000);
+    setNodes(selectedGraph.nodes);
+    setEdges(selectedGraph.edges);
 }
 
 export const deleteGraphHandler = (name, allGraphs) => {
@@ -50,4 +46,26 @@ export const deleteGraphHandler = (name, allGraphs) => {
     });
 
     localStorage.setItem('saved-graphs', JSON.stringify(newGraphs))
+}
+
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
+
+export const randomizeGraphHandler = (nodes, setNodes) => {
+    let newNodes = {};
+    const paddingX = 0.2 * window.innerWidth;
+    const paddingY = 0.15 * window.innerHeight;
+    Object.keys(nodes).forEach(node => {
+        const newNode = {
+            name: node,
+            x: getRandomInt(paddingX, window.innerWidth - paddingX),
+            y: getRandomInt(paddingY, window.innerHeight - paddingY)
+        }
+        newNodes[node] = newNode;
+    });
+    // setNodes(newNodes);
+    setNodes(prevNodes => ({ ...prevNodes, ...newNodes }));
 }

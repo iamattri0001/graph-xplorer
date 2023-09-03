@@ -27,7 +27,6 @@ const Home = ({ showMessage }) => {
 
     return (
         <div className='bg-wedgewood-950 min-h-screen relative md:overflow-hidden flex'>
-
             <Navbar
                 nodes={nodes}
                 edges={edges}
