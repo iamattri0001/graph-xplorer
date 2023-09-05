@@ -32,7 +32,8 @@ const nodeActionHandler = (nodeAction, nodes, setNodes, edges, setEdges, showMes
         }
         document.getElementById('node-name').value = '';
         const paddingX = 0.2 * window.innerWidth;
-        const paddingY = 0.2 * window.innerHeight;
+        const paddingY = 0.15 * window.innerHeight;
+        
         const node = {
             name: name,
             x: Math.random() * (window.innerWidth - 2 * paddingX) + paddingX,

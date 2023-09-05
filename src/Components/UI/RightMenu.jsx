@@ -59,8 +59,7 @@ const RightMenu = ({
 
         const algoId = document.getElementById('selected-algo').value;
 
-        const animation = algorithms[algoId].algo(nodes, edges, isDirected, showMessage, delay * 1000, weightFactor);
-
+        const animation = algorithms[algoId].algo(nodes, edges, isDirected, showMessage, delay * 1000, weightFactor, setNodes);
         setLastExec(algoId);
         setAnimation(animation);
     }
