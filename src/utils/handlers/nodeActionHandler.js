@@ -33,11 +33,11 @@ const nodeActionHandler = (nodeAction, nodes, setNodes, edges, setEdges, showMes
         document.getElementById('node-name').value = '';
         const paddingX = 0.2 * window.innerWidth;
         const paddingY = 0.15 * window.innerHeight;
-        
+
         const node = {
             name: name,
-            x: Math.random() * (window.innerWidth - 2 * paddingX) + paddingX,
-            y: Math.random() * (window.innerHeight - 2 * paddingY) + paddingY
+            x: getRandomInt(paddingX, window.innerWidth - paddingX),
+            y: getRandomInt(paddingY, window.innerHeight - paddingY)
         }
 
         setNodes(prevState => ({

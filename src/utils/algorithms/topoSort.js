@@ -2,6 +2,8 @@ import { createUnweightedGraph } from "./createGraph";
 import Queue from "../structures/queue";
 import { glowNodes } from "../animate";
 
+
+
 const topoSort = (nodes, edges, isDirected, showMessage, delay, weightFactor, setNodes) => {
     if (!isDirected) {
         showMessage("Please make the graph directed!", 'error');
@@ -48,6 +50,7 @@ const topoSort = (nodes, edges, isDirected, showMessage, delay, weightFactor, se
         levelWiseOrder.push(curLevel);
     }
 
+    
     if (count !== Object.keys(nodes).length) {
         showMessage("The graph has cycles!", 'error');
         return;
@@ -63,15 +66,15 @@ const topoSort = (nodes, edges, isDirected, showMessage, delay, weightFactor, se
     const y_max = window.innerHeight - paddingY;
     const y_min = paddingY;
 
-    let delta_x = (x_max - x_min) / (levelWiseOrder.length > 1 ? levelWiseOrder.length - 1 : 0);
+    let delta_x = (x_max - x_min) / levelWiseOrder.length;
     let gap_on_left = paddingX;
 
     let newNodes = { ...nodes };
     let sequence = [];
 
     levelWiseOrder.forEach(level => {
-        let delta_y = (y_max - y_min) / (level.length > 1 ? level.length - 1 : 1);
-        let gap_on_top = paddingY;
+        let delta_y = (y_max - y_min) / level.length ;
+        let gap_on_top = delta_y;
         level.forEach(node => {
             newNodes[node].x = gap_on_left;
             newNodes[node].y = gap_on_top + Math.random() * 20;
