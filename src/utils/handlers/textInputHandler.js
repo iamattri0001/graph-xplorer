@@ -2,7 +2,7 @@ import nodeActionHandler from "./nodeActionHandler";
 
 const textInputHandler = (data, nodes, setNodes, setEdges, setIsDirected, showMessage) => {
     const showInvalidInput = () => {
-        showMessage('Invalid Input!', 'error');
+        showMessage('Invalid Input', 'error');
         return;
     }
 
@@ -33,7 +33,7 @@ const textInputHandler = (data, nodes, setNodes, setEdges, setIsDirected, showMe
     }
 
     if (numbersArray.length < 2 * numbersArray[1] + 2) {
-        showMessage('Incomplete Input!', 'error');
+        showMessage('Incomplete Input', 'error');
         return;
     }
 
@@ -78,7 +78,7 @@ const textInputHandler = (data, nodes, setNodes, setEdges, setIsDirected, showMe
         }
 
         setEdges(newEdges);
-        showMessage('Graph Created!', 'success');
+        showMessage('Graph Created', 'success');
     }, 2000);
 
 };

@@ -42,7 +42,7 @@ const findCycle = (nodes, edges, isDirected, showMessage, delay) => {
         showMessage('Cycle found', 'success');
         return animation;
     } else {
-        showMessage('No cycle found.', 'succes');
+        showMessage('No cycle found', 'succes');
         return null;
     }
 }

@@ -4,7 +4,7 @@ import { glowNodes, highlightPath } from '../animate';
 
 const prims = (nodes, edges, isDirected, showMessage, delay, weightFactor) => {
     if (isDirected) {
-        showMessage("MST is not defined for directed graphs!", "error");
+        showMessage("MST is not defined for directed graphs", "error");
         return;
     }
 
@@ -50,7 +50,7 @@ const prims = (nodes, edges, isDirected, showMessage, delay, weightFactor) => {
     }
 
     if (included.size !== Object.keys(nodes).length) {
-        showMessage('MST is not defined for disconnected graphs!', 'error');
+        showMessage('MST is not defined for disconnected graphs', 'error');
         return;
     }
     showMessage("Cost of MST is " + costOfMST, 'success');

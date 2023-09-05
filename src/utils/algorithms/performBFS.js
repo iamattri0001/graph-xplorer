@@ -6,7 +6,7 @@ const bfsAlgo = (nodes, edges, isDirected, showMessage, delay) => {
     let source;
     source = prompt("Enter the starting vertex:");
     if (!nodes[source]) {
-        showMessage("Vertex '" + source + "' not found!", 'error');
+        showMessage("Vertex '" + source + "' not found", 'error');
         return;
     }
     showMessage('Started BFS traversal from node: "' + source + '"', 'success');

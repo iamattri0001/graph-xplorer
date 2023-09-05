@@ -6,7 +6,7 @@ import { glowNodes } from "../animate";
 
 const topoSort = (nodes, edges, isDirected, showMessage, delay, weightFactor, setNodes) => {
     if (!isDirected) {
-        showMessage("Please make the graph directed!", 'error');
+        showMessage("Please make the graph directed", 'error');
         return;
     }
 
@@ -66,15 +66,15 @@ const topoSort = (nodes, edges, isDirected, showMessage, delay, weightFactor, se
     const y_max = window.innerHeight - paddingY;
     const y_min = paddingY;
 
-    let delta_x = (x_max - x_min) / levelWiseOrder.length;
-    let gap_on_left = paddingX;
+    let delta_x = (x_max - x_min) / (levelWiseOrder.length + 1);
+    let gap_on_left = paddingX + delta_x;
 
     let newNodes = { ...nodes };
     let sequence = [];
 
     levelWiseOrder.forEach(level => {
-        let delta_y = (y_max - y_min) / level.length ;
-        let gap_on_top = delta_y;
+        let delta_y = (y_max - y_min) / (level.length + 1) ;
+        let gap_on_top = paddingY + delta_y;
         level.forEach(node => {
             newNodes[node].x = gap_on_left;
             newNodes[node].y = gap_on_top + Math.random() * 20;
@@ -92,6 +92,7 @@ const topoSort = (nodes, edges, isDirected, showMessage, delay, weightFactor, se
         nodesAnimation: glowNodes(sequence, delay)
     };
 
+    showMessage("Arranged in topological order", 'success');
     return animation;
 }
 

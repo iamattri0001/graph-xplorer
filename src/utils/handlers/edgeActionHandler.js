@@ -28,12 +28,12 @@ const edgeActionHandler = (edgeAction, nodes, edges, setEdges, isDirected, showM
         const destNode = nodes[destName];
 
         if (!sourceNode) {
-            showMessage(`'${sourceName}'  not presnt in graph.`, 'error');
+            showMessage(`'${sourceName}'  not presnt in graph`, 'error');
             return;
         }
 
         if (!destNode) {
-            showMessage(`'${destName}'  not presnt in graph.`, 'error');
+            showMessage(`'${destName}'  not presnt in graph`, 'error');
             return;
         }
         const edge = {
@@ -59,9 +59,9 @@ const edgeActionHandler = (edgeAction, nodes, edges, setEdges, isDirected, showM
         });
 
         if (newEdges.length === edges.length) {
-            showMessage("Edge doesn't exist!", 'error');
+            showMessage("Edge doesn't exist", 'error');
         } else {
-            showMessage('Edge deleted!', 'success');
+            showMessage('Edge deleted', 'success');
             setEdges(newEdges);
             document.getElementById('edge-source').value = '';
             document.getElementById('edge-dest').value = '';

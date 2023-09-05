@@ -5,7 +5,7 @@ import { createUnweightedGraph } from './createGraph';
 
 const articulationPoits = (nodes, edges, isDirected, showMessage, delay) => {
     if (isDirected) {
-        showMessage('Please make the graph undirected!', 'error');
+        showMessage('Please make the graph undirected', 'error');
         return;
     }
 
@@ -25,9 +25,9 @@ const articulationPoits = (nodes, edges, isDirected, showMessage, delay) => {
     const artPoints = Array.from(points);
     if (artPoints.length) {
         fadeNodes(artPoints, delay * artPoints.length);
-        showMessage(artPoints.length + ' articulation point(s) found!', 'success');
+        showMessage(artPoints.length + ' articulation point(s) found', 'success');
     } else {
-        showMessage('No articulation point found!', 'success');
+        showMessage('No articulation point found', 'success');
         return;
     }
 

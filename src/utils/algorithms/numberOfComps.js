@@ -2,7 +2,7 @@ import { createUnweightedGraph } from "./createGraph";
 
 const findComps = (nodes, edges, isDirected, showMessage) => {
     if (isDirected) {
-        showMessage('Number of components are not defined for directed graph.')
+        showMessage('Number of components are not defined for directed graph')
         return -1;
     }
     

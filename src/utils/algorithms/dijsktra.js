@@ -14,12 +14,12 @@ const dijsktra = (nodes, edges, isDirected, showMessage, delay, weightFactor) =>
     let source, dest;
     source = prompt("Enter the source vertex: ");
     if (!nodes[source]) {
-        showMessage("Vertex '" + source + "' not found!", 'error');
+        showMessage("Vertex '" + source + "' not found", 'error');
         return;
     }
     dest = prompt("Enter the destination vertex: ");
     if (!nodes[dest]) {
-        showMessage("Vertex '" + dest + "' not found!", 'error');
+        showMessage("Vertex '" + dest + "' not found", 'error');
         return;
     }
 

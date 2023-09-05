@@ -5,7 +5,7 @@ import { createUnweightedGraph } from './createGraph';
 
 const findBridges = (nodes, edges, isDirected, showMessage, delay) => {
     if (isDirected) {
-        showMessage('Please make the graph undirected!', 'error');
+        showMessage('Please make the graph undirected', 'error');
         return;
     }
     let in_time = {};
@@ -22,10 +22,10 @@ const findBridges = (nodes, edges, isDirected, showMessage, delay) => {
 
 
     if (bridges.length) {
-        showMessage(bridges.length + " bridge(s) found!", 'success');
+        showMessage(bridges.length + " bridge(s) found", 'success');
         fadeEdges(bridges, false, delay * bridges.length);
     } else {
-        showMessage('No bridge found!', 'success');
+        showMessage('No bridge found', 'success');
     }
 }
 

@@ -64,7 +64,7 @@ const nodeActionHandler = (nodeAction, nodes, setNodes, edges, setEdges, showMes
         document.getElementById('node-name').value = '';
         setNodes(newNodes);
         setEdges(newEdges);
-        showMessage("Deleted vertex '" + name + "' from graph.", 'success');
+        showMessage("Deleted vertex '" + name + "' from graph", 'success');
     }
 };
 export default nodeActionHandler;
