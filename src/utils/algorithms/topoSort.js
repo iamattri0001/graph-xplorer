@@ -56,14 +56,14 @@ const topoSort = (nodes, edges, isDirected, showMessage, delay, weightFactor, se
     const paddingX = 0.2 * window.innerWidth;
     const paddingY = 0.15 * window.innerHeight;
 
-    const x_max = window.innerWidth - paddingX/2;
+    const x_max = window.innerWidth - paddingX;
     const x_min = paddingX;
 
 
-    const y_max = window.innerHeight - paddingY/2;
+    const y_max = window.innerHeight - paddingY;
     const y_min = paddingY;
 
-    let delta_x = (x_max - x_min) / (levelWiseOrder.length > 1 ? levelWiseOrder.length - 1 : 1);
+    let delta_x = (x_max - x_min) / (levelWiseOrder.length > 1 ? levelWiseOrder.length - 1 : 0);
     let gap_on_left = paddingX;
 
     let newNodes = { ...nodes };
