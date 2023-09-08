@@ -12,12 +12,18 @@ const lessThan = (pair1, pair2) => {
 
 const dijsktra = (nodes, edges, isDirected, showMessage, delay, weightFactor) => {
     let source, dest;
+
     source = prompt("Enter the source vertex: ");
+    if (!source) return;
+    
     if (!nodes[source]) {
         showMessage("Vertex '" + source + "' not found", 'error');
         return;
     }
+    
     dest = prompt("Enter the destination vertex: ");
+    if (!dest) return;
+
     if (!nodes[dest]) {
         showMessage("Vertex '" + dest + "' not found", 'error');
         return;

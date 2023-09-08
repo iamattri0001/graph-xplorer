@@ -3,7 +3,10 @@ import { createUnweightedGraph } from "./createGraph";
 
 const dfsAlgo = (nodes, edges, isDirected, showMessage, delay) => {
     let source;
+
     source = prompt("Enter the starting vertex:");
+    if (!source) return;
+    
     if (!nodes[source]) {
         showMessage("Vertex '" + source + "' not found", 'error');
         return;

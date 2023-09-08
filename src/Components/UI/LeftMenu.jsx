@@ -103,7 +103,7 @@ const LeftMenu = ({
                             <span className='text-wedgewood-200 text-sm'>
                                 Weight Scale
                             </span>
-                            <input type="range" id="weight-scale-controller" max={10} min={0.1} step={0.1} onChange={(ev) => setWeightFactor(ev.target.value)} value={weightFactor} className='appearance-none h-1 w-[75%] bg-gradient-to-r from-wedgewood-100 to-wedgewood-600 rounded-md outline-none cursor-pointer' />
+                            <input type="range" id="weight-scale-controller" max={10} min={0.1} step={0.1} onChange={(ev) => setWeightFactor(ev.target.value)} value={weightFactor} title={`${weightFactor}x`} className='appearance-none h-1 w-[75%] bg-gradient-to-r from-wedgewood-100 to-wedgewood-600 rounded-md outline-none cursor-pointer' />
                         </div>
                     </div>
 

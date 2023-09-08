@@ -5,7 +5,7 @@ import { glowNodes } from "../animate";
 
 
 const topoSort = (nodes, edges, isDirected, showMessage, delay, weightFactor, setNodes) => {
-    if (!isDirected) {
+    if (!isDirected && edges.length) {
         showMessage("Please make the graph directed", 'error');
         return;
     }
@@ -29,7 +29,7 @@ const topoSort = (nodes, edges, isDirected, showMessage, delay, weightFactor, se
     });
 
     let levelWiseOrder = [];
-    let count = 0;
+    let countOfNodes = 0;
 
     while (!queue.isEmpty()) {
         let size = queue.size();
@@ -37,7 +37,7 @@ const topoSort = (nodes, edges, isDirected, showMessage, delay, weightFactor, se
         while (size--) {
             const node = queue.dequeue();
             curLevel.push(node);
-            count++;
+            countOfNodes++;
 
             adjList[node].forEach(child => {
                 inDegree[child]--;
@@ -50,8 +50,8 @@ const topoSort = (nodes, edges, isDirected, showMessage, delay, weightFactor, se
         levelWiseOrder.push(curLevel);
     }
 
-    
-    if (count !== Object.keys(nodes).length) {
+
+    if (countOfNodes !== Object.keys(nodes).length) {
         showMessage("The graph has cycles!", 'error');
         return;
     }
@@ -73,7 +73,7 @@ const topoSort = (nodes, edges, isDirected, showMessage, delay, weightFactor, se
     let sequence = [];
 
     levelWiseOrder.forEach(level => {
-        let delta_y = (y_max - y_min) / (level.length + 1) ;
+        let delta_y = (y_max - y_min) / (level.length + 1);
         let gap_on_top = paddingY + delta_y;
         level.forEach(node => {
             newNodes[node].x = gap_on_left;
