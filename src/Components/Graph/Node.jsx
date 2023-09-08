@@ -18,7 +18,6 @@ const Node = ({ name, x, y, handlePositionChange, nodeSize }) => {
 
             handlePositionChange(name, newX, newY);
         };
-
         const handleMouseUp = (event) => {
             // event.preventDefault();
             setIsDragging(false);
