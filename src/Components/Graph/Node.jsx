@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 
 const Node = ({ name, x, y, handlePositionChange, nodeSize }) => {
     const [isDragging, setIsDragging] = useState(false);
+    const [transitionDuration, setTransitionDuration] = useState('0.5s');
 
     const handleMouseDown = () => {
         setIsDragging(true);
+        setTransitionDuration('0.01s');
     };
 
     useEffect(() => {
@@ -20,19 +22,21 @@ const Node = ({ name, x, y, handlePositionChange, nodeSize }) => {
         const handleMouseUp = (event) => {
             // event.preventDefault();
             setIsDragging(false);
+            setTransitionDuration('0.5s')
         };
 
         const handleTouchMove = (event) => {
             // event.preventDefault();
             if (!isDragging) return;
 
+            setTransitionDuration('0.01s');
             if (event.touches) {
                 const touch = event.touches[0];
                 const newX = touch.clientX;
                 const newY = touch.clientY;
                 handlePositionChange(name, newX, newY);
             }
-
+            setTransitionDuration('0.5s');
         };
 
         const handleTouchEnd = (event) => {
@@ -53,6 +57,16 @@ const Node = ({ name, x, y, handlePositionChange, nodeSize }) => {
         };
     }, [isDragging, name, handlePositionChange]);
 
+
+    const transformStyles = {
+        transform: `translate(${x}px, ${y}px)`,
+        transition: `transform ${transitionDuration} ease`
+    }
+    const circleStyle = {
+        ...transformStyles,
+        filter: 'drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3))'
+    };
+    
     return (
         <g
             onMouseDown={handleMouseDown}
@@ -62,16 +76,17 @@ const Node = ({ name, x, y, handlePositionChange, nodeSize }) => {
             <circle
                 className={`node fill-node stroke-wedgewood-100 ${isDragging ? 'cursor-grabbing' : 'cursor-grab'} `}
                 r={20 * nodeSize}
-                cx={x}
-                cy={y}
+                // cx={x}
+                // cy={y}
                 strokeWidth={1.5}
                 dataname={name}
-                style={{ filter: 'drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3))' }}
+                style={{...transformStyles, filter: 'drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3))'}}
             />
             <text
                 className={`${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
-                x={x}
-                y={y}
+                // x={x}
+                // y={y}
+                style={{...transformStyles}}
                 textAnchor="middle"
                 dominantBaseline="middle"
                 fill="currentColor"
