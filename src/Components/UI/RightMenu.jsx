@@ -78,7 +78,7 @@ const RightMenu = ({
     return (
         <>
             <div
-                className={`floating-menu absolute h-screen flex items-center justify-center ${isRightMenuOpen ? `right-5` : `right-[-154px]`
+                className={`floating-menu absolute h-screen flex items-center justify-center ${isRightMenuOpen ? `right-5` : `right-[-170px]`
                     } transition-all duration-200 gap-x-1`}
             >
                 <div className='text-wedgewood-100 text-3xl cursor-pointer menu-switch'>
@@ -99,8 +99,8 @@ const RightMenu = ({
                                 killAnimation(lastExec);
                             }}
                             className={`text-center px-3 py-1 text-sm rounded-sm cursor-pointer transition-all duration-500 border ${isWeighted
-                                    ? 'bg-wedgewood-500 text-wedgewood-100 border-wedgewood-300'
-                                    : `border-wedgewood-300 text-wedgewood-300`
+                                ? 'bg-wedgewood-500 text-wedgewood-100 border-wedgewood-300'
+                                : `border-wedgewood-300 text-wedgewood-300`
                                 }`}
                         >
                             Weighted
@@ -111,8 +111,8 @@ const RightMenu = ({
                                 killAnimation(lastExec);
                             }}
                             className={`text-center px-3 py-1 text-sm rounded-sm cursor-pointer transition-all duration-500 border ${!isWeighted
-                                    ? 'bg-wedgewood-500 text-wedgewood-100 border-wedgewood-300'
-                                    : `border-wedgewood-300 text-wedgewood-300`
+                                ? 'bg-wedgewood-500 text-wedgewood-100 border-wedgewood-300'
+                                : `border-wedgewood-300 text-wedgewood-300`
                                 }`}
                         >
                             Unweighted
@@ -125,8 +125,8 @@ const RightMenu = ({
                                 setIsDirected(true);
                             }}
                             className={`text-center px-3 py-1 text-sm rounded-sm cursor-pointer transition-all duration-500 border ${isDirected
-                                    ? 'bg-wedgewood-500 text-wedgewood-100 border-wedgewood-300'
-                                    : `border-wedgewood-300 text-wedgewood-300`
+                                ? 'bg-wedgewood-500 text-wedgewood-100 border-wedgewood-300'
+                                : `border-wedgewood-300 text-wedgewood-300`
                                 }`}
                         >
                             Directed
@@ -137,8 +137,8 @@ const RightMenu = ({
                                 killAnimation(lastExec);
                             }}
                             className={`text-center px-3 py-1 text-sm rounded-sm cursor-pointer transition-all duration-500 border ${!isDirected
-                                    ? 'bg-wedgewood-500 text-wedgewood-100 border-wedgewood-300'
-                                    : `border-wedgewood-300 text-wedgewood-300`
+                                ? 'bg-wedgewood-500 text-wedgewood-100 border-wedgewood-300'
+                                : `border-wedgewood-300 text-wedgewood-300`
                                 }`}
                         >
                             Undirected

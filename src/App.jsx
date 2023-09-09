@@ -25,10 +25,10 @@ const App = () => {
 
   return (
     <>
-      {isMobile ? <MobilePrompt /> : <div>
+      {isMobile ? <MobilePrompt /> : <>
         <Home showMessage={showMessage} />
         <Toaster />
-      </div>}
+      </>}
     </>
   )
 }

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { getTransformStyles, duration } from '../../utils/animations/transform';
 
 const Node = ({ name, x, y, handlePositionChange, nodeSize }) => {
     const [isDragging, setIsDragging] = useState(false);
-    const [transitionDuration, setTransitionDuration] = useState('0.5s');
+    const [transitionDuration, setTransitionDuration] = useState(duration.slow);
 
     const handleMouseDown = () => {
         setIsDragging(true);
-        setTransitionDuration('0.01s');
+        setTransitionDuration(duration.fast);
     };
 
     useEffect(() => {
@@ -21,21 +22,21 @@ const Node = ({ name, x, y, handlePositionChange, nodeSize }) => {
         const handleMouseUp = (event) => {
             // event.preventDefault();
             setIsDragging(false);
-            setTransitionDuration('0.5s')
+            setTransitionDuration(duration.slow)
         };
 
         const handleTouchMove = (event) => {
             // event.preventDefault();
             if (!isDragging) return;
 
-            setTransitionDuration('0.01s');
+            setTransitionDuration(duration.fast);
             if (event.touches) {
                 const touch = event.touches[0];
                 const newX = touch.clientX;
                 const newY = touch.clientY;
                 handlePositionChange(name, newX, newY);
             }
-            setTransitionDuration('0.5s');
+            setTransitionDuration(duration.slow);
         };
 
         const handleTouchEnd = (event) => {
@@ -56,16 +57,8 @@ const Node = ({ name, x, y, handlePositionChange, nodeSize }) => {
         };
     }, [isDragging, name, handlePositionChange]);
 
+    const transformStyles = getTransformStyles(x, y, transitionDuration);
 
-    const transformStyles = {
-        transform: `translate(${x}px, ${y}px)`,
-        transition: `transform ${transitionDuration} ease`
-    }
-    const circleStyle = {
-        ...transformStyles,
-        filter: 'drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3))'
-    };
-    
     return (
         <g
             onMouseDown={handleMouseDown}
@@ -79,13 +72,13 @@ const Node = ({ name, x, y, handlePositionChange, nodeSize }) => {
                 // cy={y}
                 strokeWidth={1.5}
                 dataname={name}
-                style={{...transformStyles, filter: 'drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3))'}}
+                style={{ ...transformStyles, filter: 'drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3))' }}
             />
             <text
                 className={`${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
                 // x={x}
                 // y={y}
-                style={{...transformStyles}}
+                style={{ ...transformStyles }}
                 textAnchor="middle"
                 dominantBaseline="middle"
                 fill="currentColor"
