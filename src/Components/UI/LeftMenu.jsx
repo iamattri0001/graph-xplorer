@@ -2,10 +2,14 @@ import { useState, useEffect, useRef } from 'react'
 import { BsArrowBarRight } from 'react-icons/bs';
 import { IoCloseOutline } from 'react-icons/io5';
 import { AiOutlineArrowRight } from 'react-icons/ai';
+import { ImUndo2, ImRedo2 } from 'react-icons/im'
 
 import nodeActionHandler from '../../utils/handlers/nodeActionHandler';
 import edgeActionHandler from '../../utils/handlers/edgeActionHandler';
 import { resetGraphHandler, randomizeGraphHandler } from '../../utils/handlers/graphHandler';
+
+import { undoActions } from '../../utils/handlers/handleUndo';
+
 import SaveGraph from './SaveGraph';
 import LoadGraph from './LoadGraph';
 import DeleteGraph from './DeleteGraph';
@@ -20,7 +24,11 @@ const LeftMenu = ({
     setNodeSize,
     nodeSize,
     weightFactor,
-    setWeightFactor }) => {
+    setWeightFactor,
+    addHistory,
+    getHistory,
+    resetHistory
+}) => {
 
 
     const [isOpen, setIsOpen] = useState(true);
@@ -50,7 +58,7 @@ const LeftMenu = ({
 
     const handleNodeAction = (event) => {
         event.preventDefault();
-        nodeActionHandler(nodeAction, nodes, setNodes, edges, setEdges, showMessage);
+        nodeActionHandler(nodeAction, nodes, setNodes, edges, setEdges, showMessage, null, addHistory)
     }
 
     const sourceInputRef = useRef(null);
@@ -78,8 +86,10 @@ const LeftMenu = ({
             setIsSaveOpen(true);
         else if (action === 'load')
             setIsLoadOpen(true);
-        else if (action === 'reset')
+        else if (action === 'reset') {
             resetGraphHandler(setNodes, setEdges, showMessage);
+            resetHistory();
+        }
         else if (action === 'delete')
             setIsDeleteOpen(true);
     }
@@ -89,7 +99,7 @@ const LeftMenu = ({
             <div
                 className={`floating-menu absolute h-screen flex items-center justify-center ${isOpen ? `left-5` : `left-[-194px]`} transition-all duration-200 gap-x-2`}>
 
-                <div className=' text-wedgewood-50 flex flex-col items-center justify-center gap-y-7'>
+                <div className=' text-wedgewood-50 flex flex-col items-center justify-center gap-y-5'>
                     <div className='bg-wedgewood-900 w-full py-4 flex flex-col gap-y-5 items-center justify-center rounded-md'>
 
                         <div className='flex flex-col w-full items-center justify-center gap-y-2'>
@@ -202,6 +212,16 @@ const LeftMenu = ({
                             randomizeGraphHandler(nodes, setNodes);
                         }}>Randomize</button>
                     </div>
+
+                    <div className='flex items-center justify-center gap-x-4 bg-wedgewood-900 w-fit px-5 py-3 rounded-md'>
+                        <button title='undo' className='text-2xl text-wedgewood-50' onClick={() => undoActions(nodes, setNodes, edges, setEdges, getHistory)}>
+                            <ImUndo2 />
+                        </button>
+
+                        <button title='redo' className='text-2xl text-wedgewood-50'>
+                            <ImRedo2 />
+                        </button>
+                    </div>
                 </div>
                 <div className='text-wedgewood-100 text-3xl cursor-pointer menu-switch'>
                     {isOpen ? (
@@ -228,6 +248,7 @@ const LeftMenu = ({
                 isLoadOpen={isLoadOpen}
                 showMessage={showMessage}
                 allGraphs={allGraphs}
+                resetHistory={resetHistory}
             />}
 
             {isDeleteOpen && <DeleteGraph

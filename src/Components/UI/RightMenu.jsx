@@ -74,7 +74,7 @@ const RightMenu = ({
     };
 
     const [isHelpOpen, setIsHelpOpen] = useState(false);
-
+    
     return (
         <>
             <div

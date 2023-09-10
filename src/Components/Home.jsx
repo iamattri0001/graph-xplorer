@@ -5,8 +5,11 @@ import Navbar from './UI/Navbar';
 import Graph from './Graph';
 import LeftMenu from './UI/LeftMenu';
 
-const Home = ({ showMessage }) => {
+const MemoizedRightMenu = React.memo(RightMenu);
+const MemoizedGraph = React.memo(Graph);
+const MemoizedLeftMenu = React.memo(LeftMenu);
 
+const Home = ({ showMessage }) => {
     const [nodes, setNodes] = useState({});
     const [edges, setEdges] = useState([]);
 
@@ -17,6 +20,8 @@ const Home = ({ showMessage }) => {
 
     const [weightFactor, setWeightFactor] = useState(1);
 
+    const [history, setHistory] = useState([]);
+
     useEffect(() => {
         if (localStorage.getItem('graph-working')) {
             const { nodes, edges } = JSON.parse(localStorage.getItem('graph-working'));
@@ -25,19 +30,39 @@ const Home = ({ showMessage }) => {
         }
     }, []);
 
+    const addHistory = (action) => {
+        if (history.length < 20) {
+            setHistory([...history, action]);
+        } else {
+            let newHistory = history;
+            while (newHistory.length > 20) {
+                newHistory.shift();
+            }
+            newHistory.push(action);
+        }
+    }
+
+    const getHistory = () => {
+        if (history.length === 0) {
+            return null;
+        } else {
+            let lastAction = history[history.length - 1];
+            let newHistory = history;
+            newHistory.pop();
+            setHistory(newHistory);
+            return lastAction;
+        }
+    }
+    
+    const resetHistory = () => {
+        setHistory([]);
+    }
+
     return (
         <div className='bg-wedgewood-950 min-h-screen relative md:overflow-hidden flex'>
-            <Navbar
-                nodes={nodes}
-                edges={edges}
-                setEdges={setEdges}
-                setNodes={setNodes}
-                showMessage={showMessage}
-                isDirected={isDirected}
-            />
+            <Navbar />
 
-
-            <RightMenu
+            <MemoizedRightMenu
                 setIsDirected={setIsDirected}
                 setIsWeighted={setIsWeighted}
                 isDirected={isDirected}
@@ -49,7 +74,8 @@ const Home = ({ showMessage }) => {
                 showMessage={showMessage}
                 weightFactor={weightFactor}
             />
-            <Graph
+
+            <MemoizedGraph
                 nodes={nodes}
                 edges={edges}
                 setNodes={setNodes}
@@ -60,7 +86,7 @@ const Home = ({ showMessage }) => {
                 weightFactor={weightFactor}
             />
 
-            <LeftMenu
+            <MemoizedLeftMenu
                 nodes={nodes}
                 edges={edges}
                 setEdges={setEdges}
@@ -71,9 +97,12 @@ const Home = ({ showMessage }) => {
                 setNodeSize={setNodeSize}
                 weightFactor={weightFactor}
                 setWeightFactor={setWeightFactor}
+                addHistory={addHistory}
+                getHistory={getHistory}
+                resetHistory={resetHistory}
             />
-        </div >
-    )
-}
+        </div>
+    );
+};
 
-export default Home
+export default Home;

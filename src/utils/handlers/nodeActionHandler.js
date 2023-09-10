@@ -2,7 +2,7 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
-const nodeActionHandler = (nodeAction, nodes, setNodes, edges, setEdges, showMessage, givenName) => {
+const nodeActionHandler = (nodeAction, nodes, setNodes, edges, setEdges, showMessage, givenName, addHistory) => {
     let name;
     if (givenName) {
         name = givenName;
@@ -19,10 +19,12 @@ const nodeActionHandler = (nodeAction, nodes, setNodes, edges, setEdges, showMes
             [name]: node
         }));
 
+        addHistory([['add', 'node', node]]);
         return true;
     } else {
         name = document.getElementById('node-name').value;
     }
+
     if (name === '')
         return;
     if (nodeAction === 'Add') {
@@ -40,17 +42,21 @@ const nodeActionHandler = (nodeAction, nodes, setNodes, edges, setEdges, showMes
             y: getRandomInt(paddingY, window.innerHeight - paddingY)
         }
 
+        addHistory([['add', 'node', node]]);
         setNodes(prevState => ({
             ...prevState,
             [name]: node
         }));
-
+        
         return true;
     } else {
         if (!nodes[name]) {
             showMessage("Vertex doesn't exist", 'error');
             return;
         }
+
+        document.getElementById('node-name').value = '';
+        let history = [['delete', 'node', nodes[name]]];
 
         const newNodes = { ...nodes };
         delete newNodes[name];
@@ -59,9 +65,13 @@ const nodeActionHandler = (nodeAction, nodes, setNodes, edges, setEdges, showMes
         edges.forEach(edge => {
             if (edge.from !== name && edge.to !== name) {
                 newEdges.push(edge);
+            } else {
+                history.push(['delete', 'edge', edge]);
             }
         });
-        document.getElementById('node-name').value = '';
+
+        addHistory(history);
+
         setNodes(newNodes);
         setEdges(newEdges);
         showMessage("Deleted vertex '" + name + "' from graph", 'success');

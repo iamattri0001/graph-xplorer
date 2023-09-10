@@ -4,11 +4,12 @@ import {
     loadGraphHandler
 } from '../../utils/handlers/graphHandler';
 
-const LoadGraph = ({ setIsLoadOpen, isLoadOpen, setEdges, setNodes, allGraphs, showMessage }) => {
+const LoadGraph = ({ setIsLoadOpen, isLoadOpen, setEdges, setNodes, allGraphs, showMessage, resetHistory }) => {
     return (
         <Modal openCloseHandler={setIsLoadOpen} openOrClose={isLoadOpen}>
             <form className='bg-wedgewood-500 w-[16rem] h-[6rem] rounded-md flex items-center justify-center gap-x-2' onSubmit={(ev) => {
                 ev.preventDefault();
+                resetHistory();
                 loadGraphHandler(setNodes, setEdges, document.getElementById('selected-name').value, allGraphs);
 
                 showMessage('Graph Loaded!', 'success');
