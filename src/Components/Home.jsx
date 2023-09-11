@@ -22,6 +22,8 @@ const Home = ({ showMessage }) => {
 
     const [history, setHistory] = useState([]);
 
+    const [deletedHistory, setDeletedHistory] = useState([]);
+
     useEffect(() => {
         if (localStorage.getItem('graph-working')) {
             const { nodes, edges } = JSON.parse(localStorage.getItem('graph-working'));
@@ -29,17 +31,19 @@ const Home = ({ showMessage }) => {
             setNodes(nodes);
         }
     }, []);
-
+    
     const addHistory = (action) => {
-        if (history.length < 20) {
-            setHistory([...history, action]);
-        } else {
-            let newHistory = history;
+        setHistory(prevState => {
+            let newHistory = [...prevState];
+
             while (newHistory.length > 20) {
                 newHistory.shift();
             }
+
             newHistory.push(action);
-        }
+
+            return newHistory;
+        });
     }
 
     const getHistory = () => {
@@ -47,16 +51,49 @@ const Home = ({ showMessage }) => {
             return null;
         } else {
             let lastAction = history[history.length - 1];
-            let newHistory = history;
-            newHistory.pop();
-            setHistory(newHistory);
+            setHistory(prevState => {
+                let newHistory = [...prevState];
+                newHistory.pop();
+                return newHistory;
+            });
+            addDeletedHistory(lastAction);
             return lastAction;
         }
     }
 
     const resetHistory = () => {
         setHistory([]);
+        setDeletedHistory([]);
     }
+
+    const addDeletedHistory = (action) => {
+        setDeletedHistory(prevState => {
+            let newDeletedHistory = [...prevState];
+
+            while (newDeletedHistory.length > 20) {
+                newDeletedHistory.shift();
+            }
+            newDeletedHistory.push(action);
+
+            return newDeletedHistory;
+        });
+    }
+
+    const getDeletedHistory = () => {
+        if (deletedHistory.length === 0) {
+            return null;
+        } else {
+            let lastAction = deletedHistory[deletedHistory.length - 1];
+            setDeletedHistory(prevState => {
+                let newDeletedHistory = [...prevState];
+                newDeletedHistory.pop();
+                return newDeletedHistory;
+            });
+            addHistory(lastAction);
+            return lastAction;
+        }
+    }
+
 
     return (
         <div className='bg-wedgewood-950 min-h-screen relative md:overflow-hidden flex'>
@@ -77,6 +114,8 @@ const Home = ({ showMessage }) => {
                 addHistory={addHistory}
                 getHistory={getHistory}
                 resetHistory={resetHistory}
+                addDeletedHistory={addDeletedHistory}
+                getDeletedHistory={getDeletedHistory}
             />
 
             <MemoizedGraph

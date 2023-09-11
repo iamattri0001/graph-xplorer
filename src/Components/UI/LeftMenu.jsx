@@ -9,6 +9,7 @@ import edgeActionHandler from '../../utils/handlers/edgeActionHandler';
 import { resetGraphHandler, randomizeGraphHandler } from '../../utils/handlers/graphHandler';
 
 import { undoActions } from '../../utils/handlers/handleUndo';
+import { redoActions } from '../../utils/handlers/handleRedo';
 
 import SaveGraph from './SaveGraph';
 import LoadGraph from './LoadGraph';
@@ -27,7 +28,9 @@ const LeftMenu = ({
     setWeightFactor,
     addHistory,
     getHistory,
-    resetHistory
+    resetHistory,
+    addDeletedHistory,
+    getDeletedHistory
 }) => {
 
 
@@ -218,7 +221,7 @@ const LeftMenu = ({
                             <ImUndo2 />
                         </button>
 
-                        <button title='redo' className='text-2xl text-wedgewood-50'>
+                        <button title='redo' className='text-2xl text-wedgewood-50' onClick={() => redoActions(setNodes, setEdges, getDeletedHistory)}>
                             <ImRedo2 />
                         </button>
                     </div>

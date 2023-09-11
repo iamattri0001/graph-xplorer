@@ -13,19 +13,19 @@ export const undoActions = (setNodes, setEdges, getHistory) => {
                     return newNodes;
                 });
 
-            } else {
+            } else if (action[2] === 'edge') {
                 setEdges(prevState => {
                     let newEdges = prevState.filter(edge => edge != action[2]);
                     return newEdges;
                 });
             }
-        } else {
+        } else if (action[0] === 'delete') {
             if (action[1] === 'node') {
                 setNodes(prevState => ({
                     ...prevState,
                     [action[2].name]: action[2]
                 }));
-            } else {
+            } else if (action[1] === 'edge') {
                 setEdges(prevState => {
                     let newEdges = prevState;
                     newEdges.push(action[2]);
