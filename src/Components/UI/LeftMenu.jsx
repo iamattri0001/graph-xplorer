@@ -214,7 +214,7 @@ const LeftMenu = ({
                     </div>
 
                     <div className='flex items-center justify-center gap-x-4 bg-wedgewood-900 w-fit px-5 py-3 rounded-md'>
-                        <button title='undo' className='text-2xl text-wedgewood-50' onClick={() => undoActions(nodes, setNodes, edges, setEdges, getHistory)}>
+                        <button title='undo' className='text-2xl text-wedgewood-50' onClick={() => undoActions(setNodes, setEdges, getHistory)}>
                             <ImUndo2 />
                         </button>
 

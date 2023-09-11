@@ -53,7 +53,7 @@ const Home = ({ showMessage }) => {
             return lastAction;
         }
     }
-    
+
     const resetHistory = () => {
         setHistory([]);
     }
@@ -62,29 +62,6 @@ const Home = ({ showMessage }) => {
         <div className='bg-wedgewood-950 min-h-screen relative md:overflow-hidden flex'>
             <Navbar />
 
-            <MemoizedRightMenu
-                setIsDirected={setIsDirected}
-                setIsWeighted={setIsWeighted}
-                isDirected={isDirected}
-                isWeighted={isWeighted}
-                nodes={nodes}
-                setNodes={setNodes}
-                setEdges={setEdges}
-                edges={edges}
-                showMessage={showMessage}
-                weightFactor={weightFactor}
-            />
-
-            <MemoizedGraph
-                nodes={nodes}
-                edges={edges}
-                setNodes={setNodes}
-                isDirected={isDirected}
-                isWeighted={isWeighted}
-                showMessage={showMessage}
-                nodeSize={nodeSize}
-                weightFactor={weightFactor}
-            />
 
             <MemoizedLeftMenu
                 nodes={nodes}
@@ -101,6 +78,33 @@ const Home = ({ showMessage }) => {
                 getHistory={getHistory}
                 resetHistory={resetHistory}
             />
+
+            <MemoizedGraph
+                nodes={nodes}
+                edges={edges}
+                setNodes={setNodes}
+                isDirected={isDirected}
+                isWeighted={isWeighted}
+                showMessage={showMessage}
+                nodeSize={nodeSize}
+                weightFactor={weightFactor}
+            />
+
+            <MemoizedRightMenu
+                setIsDirected={setIsDirected}
+                setIsWeighted={setIsWeighted}
+                isDirected={isDirected}
+                isWeighted={isWeighted}
+                nodes={nodes}
+                setNodes={setNodes}
+                setEdges={setEdges}
+                edges={edges}
+                showMessage={showMessage}
+                weightFactor={weightFactor}
+                addHistory={addHistory}
+                resetHistory={resetHistory}
+            />
+
         </div>
     );
 };

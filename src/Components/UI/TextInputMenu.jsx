@@ -1,7 +1,7 @@
 import React from 'react'
 import textInputHandler from './../../utils/handlers/textInputHandler';
 
-const TextInputMenu = ({nodes, setNodes, edges,  setEdges, setIsDirected, showMessage }) => {
+const TextInputMenu = ({ nodes, setNodes, setEdges, setIsDirected, showMessage }) => {
 
     const handleBuild = (event) => {
         event.preventDefault();
@@ -9,7 +9,7 @@ const TextInputMenu = ({nodes, setNodes, edges,  setEdges, setIsDirected, showMe
         if (data !== '')
             textInputHandler(data, nodes, setNodes, setEdges, setIsDirected, showMessage);
     }
-    
+
     return (
         <div className='bg-wedgewood-400 px-4 py-7 flex flex-col items-center justify-center gap-y-3 rounded-md h-[50vh]'>
             <div>

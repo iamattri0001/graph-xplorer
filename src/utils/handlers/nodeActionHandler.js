@@ -18,8 +18,6 @@ const nodeActionHandler = (nodeAction, nodes, setNodes, edges, setEdges, showMes
             ...prevState,
             [name]: node
         }));
-
-        addHistory([['add', 'node', node]]);
         return true;
     } else {
         name = document.getElementById('node-name').value;

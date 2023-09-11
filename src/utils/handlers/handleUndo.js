@@ -1,4 +1,4 @@
-export const undoActions = (nodes, setNodes, edges, setEdges, getHistory) => {
+export const undoActions = (setNodes, setEdges, getHistory) => {
     const history = getHistory();
     if (!history) {
         return;
@@ -7,8 +7,6 @@ export const undoActions = (nodes, setNodes, edges, setEdges, getHistory) => {
     history.forEach(action => {
         if (action[0] === 'add') {
             if (action[1] === 'node') {
-                let newNodes = nodes;
-                delete newNodes[action[2].name];
                 setNodes(prevState => {
                     const newNodes = { ...prevState };
                     delete newNodes[action[2].name];
