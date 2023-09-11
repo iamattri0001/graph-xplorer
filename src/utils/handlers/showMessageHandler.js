@@ -3,7 +3,6 @@ import toast from 'react-hot-toast';
 import toastSettings from '../toastSettings'
 
 export const showMessage = (message, type, duration = 3000) => {
-    console.log(message);
     if (type === 'info') {
         toast(message, toastSettings);
     } else if (type === 'error') {

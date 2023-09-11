@@ -5,7 +5,7 @@ import Navbar from './UI/Navbar';
 import Graph from './Graph';
 import LeftMenu from './UI/LeftMenu';
 
-const Home = ({ showMessage }) => {
+const Home = () => {
 
     const [nodeSize, setNodeSize] = useState(1.5);
     const [isDirected, setIsDirected] = useState(false);
@@ -19,7 +19,6 @@ const Home = ({ showMessage }) => {
 
             <LeftMenu
                 isDirected={isDirected}
-                showMessage={showMessage}
                 nodeSize={nodeSize}
                 setNodeSize={setNodeSize}
                 weightFactor={weightFactor}
@@ -29,7 +28,6 @@ const Home = ({ showMessage }) => {
             <Graph
                 isDirected={isDirected}
                 isWeighted={isWeighted}
-                showMessage={showMessage}
                 nodeSize={nodeSize}
                 weightFactor={weightFactor}
             />
@@ -39,7 +37,6 @@ const Home = ({ showMessage }) => {
                 setIsWeighted={setIsWeighted}
                 isDirected={isDirected}
                 isWeighted={isWeighted}
-                showMessage={showMessage}
                 weightFactor={weightFactor}
             />
 

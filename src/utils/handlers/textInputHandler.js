@@ -1,6 +1,8 @@
 import nodeActionHandler from "./nodeActionHandler";
 
-const textInputHandler = (data, nodes, setNodes, setEdges, setIsDirected, showMessage, clearHistory) => {
+import { showMessage } from "./showMessageHandler";
+
+const textInputHandler = (data, nodes, setNodes, setEdges, setIsDirected, clearHistory) => {
     const showInvalidInput = () => {
         showMessage('Invalid Input', 'error');
         return;

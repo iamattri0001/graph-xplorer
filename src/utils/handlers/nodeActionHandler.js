@@ -4,7 +4,7 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
-const nodeActionHandler = (nodeAction, nodes, setNodes, edges, setEdges, xu, givenName, addHistory) => {
+const nodeActionHandler = (nodeAction, nodes, setNodes, edges, setEdges, givenName, addHistory) => {
     let name;
     if (givenName) {
         if (nodeAction === 'Add') {
@@ -37,7 +37,7 @@ const nodeActionHandler = (nodeAction, nodes, setNodes, edges, setEdges, xu, giv
             showMessage('Provide a unique name', 'error')
             return;
         }
-        
+
         document.getElementById('node-name').value = '';
         const paddingX = 0.2 * window.innerWidth;
         const paddingY = 0.15 * window.innerHeight;

@@ -2,7 +2,9 @@ import React from 'react';
 import Modal from './Modal';
 import { saveGraphHandler } from '../../utils/handlers/graphHandler';
 
-const SaveGraph = ({ setIsSaveOpen, isSaveOpen, nodes, edges, allGraphs, showMessage }) => {
+import { showMessage } from '../../utils/handlers/showMessageHandler';
+
+const SaveGraph = ({ setIsSaveOpen, isSaveOpen, nodes, edges, allGraphs }) => {
     return (
         <Modal openCloseHandler={setIsSaveOpen} openOrClose={isSaveOpen}>
             <div className='w-[20rem] h-[8rem] bg-wedgewood-400 rounded-md px-4 py-2 flex items-center justify-center'>

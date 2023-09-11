@@ -1,10 +1,10 @@
 import React from 'react'
 import Modal from './Modal';
-import {
-    loadGraphHandler
-} from '../../utils/handlers/graphHandler';
+import { loadGraphHandler } from '../../utils/handlers/graphHandler';
 
-const LoadGraph = ({ setIsLoadOpen, isLoadOpen, setEdges, setNodes, allGraphs, showMessage, resetHistory }) => {
+import { showMessage } from '../../utils/handlers/showMessageHandler';
+
+const LoadGraph = ({ setIsLoadOpen, isLoadOpen, setEdges, setNodes, allGraphs, resetHistory }) => {
     return (
         <Modal openCloseHandler={setIsLoadOpen} openOrClose={isLoadOpen}>
             <form className='bg-wedgewood-500 w-[16rem] h-[6rem] rounded-md flex items-center justify-center gap-x-2' onSubmit={(ev) => {

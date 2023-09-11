@@ -43,12 +43,13 @@ const Node = ({ name, x, y, handlePositionChange, nodeSize }) => {
 
         const handleMouseUp = (event) => {
             // event.preventDefault();
+            
             if (isDeleteActive) {
                 console.log('delete');
-                nodeActionHandler('Delete', nodes, setNodes, edges, setEdges, null, name, addHistory);
+                nodeActionHandler('Delete', nodes, setNodes, edges, setEdges, name, addHistory);
             }
+
             setIsDragging(false);
-            // setIsDeleteActive(false)
             setTransitionDuration(duration.slow)
         };
 

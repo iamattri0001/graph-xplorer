@@ -9,12 +9,13 @@ import Help from './Help';
 import Modal from './Modal';
 import { useGraph } from '../../contexts/GraphProvider';
 
+import { showMessage } from '../../utils/handlers/showMessageHandler';
+
 const RightMenu = ({
     setIsDirected,
     setIsWeighted,
     isWeighted,
     isDirected,
-    showMessage,
     weightFactor,
 }) => {
     const [lastExec, setLastExec] = useState(2);
@@ -23,7 +24,7 @@ const RightMenu = ({
     const [inputMenuOpen, setInputMenuOpen] = useState(false);
     const [isRightMenuOpen, setIsRightMenuOpen] = useState(true);
 
-    const { nodes, edges, setNodes} = useGraph();
+    const { nodes, edges, setNodes } = useGraph();
 
     const handleRightShiftDown = (event) => {
         if (event.shiftKey && event.code === 'ShiftRight') {

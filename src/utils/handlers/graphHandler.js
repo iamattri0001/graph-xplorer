@@ -1,3 +1,5 @@
+import { showMessage } from "./showMessageHandler";
+
 export const saveGraphHandler = (nodes, edges, name, allGraphs) => {
 
     let newGraph = { name, nodes, edges };
@@ -17,7 +19,7 @@ export const saveGraphHandler = (nodes, edges, name, allGraphs) => {
     localStorage.setItem('saved-graphs', JSON.stringify(allGraphs));
 }
 
-export const resetGraphHandler = (setNodes, setEdges, showMessage) => {
+export const resetGraphHandler = (setNodes, setEdges) => {
     localStorage.removeItem('graph-working');
     setEdges([]);
     setNodes({});

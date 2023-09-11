@@ -1,4 +1,6 @@
-const edgeActionHandler = (edgeAction, nodes, edges, setEdges, isDirected, showMessage, givenSrc, givenDest, addHistory) => {
+import { showMessage } from "./showMessageHandler";
+
+const edgeActionHandler = (edgeAction, nodes, edges, setEdges, isDirected, givenSrc, givenDest, addHistory) => {
 
     let sourceName;
     if (givenSrc) {

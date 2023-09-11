@@ -2,7 +2,9 @@ import React from 'react'
 import Modal from './Modal'
 import { deleteGraphHandler } from '../../utils/handlers/graphHandler';
 
-const DeleteGraph = ({ setIsDeleteOpen, isDeleteOpen, allGraphs, showMessage }) => {
+import { showMessage } from '../../utils/handlers/showMessageHandler';
+
+const DeleteGraph = ({ setIsDeleteOpen, isDeleteOpen, allGraphs }) => {
     return (
         <Modal openCloseHandler={setIsDeleteOpen} openOrClose={isDeleteOpen}>
             <form className='bg-wedgewood-500 w-[16rem] h-[6rem] rounded-md flex items-center justify-center gap-x-2' onSubmit={(ev) => {

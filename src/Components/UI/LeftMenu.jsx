@@ -18,7 +18,6 @@ import { useGraph } from '../../contexts/GraphProvider';
 
 const LeftMenu = ({
     isDirected,
-    showMessage,
     setNodeSize,
     nodeSize,
     weightFactor,
@@ -49,12 +48,12 @@ const LeftMenu = ({
 
     const handleEdgeAction = (event) => {
         event.preventDefault();
-        edgeActionHandler(edgeAction, nodes, edges, setEdges, isDirected, showMessage, null, null, addHistory);
+        edgeActionHandler(edgeAction, nodes, edges, setEdges, isDirected, null, null, addHistory);
     }
 
     const handleNodeAction = (event) => {
         event.preventDefault();
-        nodeActionHandler(nodeAction, nodes, setNodes, edges, setEdges, showMessage, null, addHistory)
+        nodeActionHandler(nodeAction, nodes, setNodes, edges, setEdges, null, addHistory)
     }
 
     const sourceInputRef = useRef(null);
@@ -83,7 +82,7 @@ const LeftMenu = ({
         else if (action === 'load')
             setIsLoadOpen(true);
         else if (action === 'reset') {
-            resetGraphHandler(setNodes, setEdges, showMessage);
+            resetGraphHandler(setNodes, setEdges);
             resetHistory();
         }
         else if (action === 'delete')
@@ -234,7 +233,6 @@ const LeftMenu = ({
                 allGraphs={allGraphs}
                 nodes={nodes}
                 edges={edges}
-                showMessage={showMessage}
             />}
 
             {isLoadOpen && allGraphs.length && <LoadGraph
@@ -242,7 +240,6 @@ const LeftMenu = ({
                 setNodes={setNodes}
                 setIsLoadOpen={setIsLoadOpen}
                 isLoadOpen={isLoadOpen}
-                showMessage={showMessage}
                 allGraphs={allGraphs}
                 resetHistory={resetHistory}
             />}
@@ -250,9 +247,9 @@ const LeftMenu = ({
             {isDeleteOpen && <DeleteGraph
                 setIsDeleteOpen={setIsDeleteOpen}
                 isDeleteOpen={isDeleteOpen}
-                showMessage={showMessage}
                 allGraphs={allGraphs}
             />}
+
         </>
     )
 }
