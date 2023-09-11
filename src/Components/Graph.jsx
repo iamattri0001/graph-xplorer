@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
 import Node from './Graph/Node';
 import Edge from './Graph/Edge';
+import { useGraph } from '../contexts/GraphProvider';
 
-const Graph = ({ nodes, edges, setNodes, isDirected, isWeighted, nodeSize, weightFactor }) => {
+const Graph = ({ isDirected, isWeighted, nodeSize, weightFactor }) => {
 
+    const { nodes, setNodes, edges, setEdges } = useGraph();
     const handlePositionChange = (name, x, y) => {
         const node = nodes[name];
         if (node) {
@@ -16,6 +18,15 @@ const Graph = ({ nodes, edges, setNodes, isDirected, isWeighted, nodeSize, weigh
             }));
         }
     }
+
+    useEffect(() => {
+        if (localStorage.getItem('graph-working')) {
+            const { nodes, edges } = JSON.parse(localStorage.getItem('graph-working'));
+            setEdges(edges);
+            setNodes(nodes);
+        }
+    }, []);
+
 
     useEffect(() => {
         if (Object.keys(nodes).length) {

@@ -1,4 +1,4 @@
-const edgeActionHandler = (edgeAction, nodes, edges, setEdges, isDirected, showMessage, givenSrc, givenDest) => {
+const edgeActionHandler = (edgeAction, nodes, edges, setEdges, isDirected, showMessage, givenSrc, givenDest, addHistory) => {
 
     let sourceName;
     if (givenSrc) {
@@ -40,20 +40,26 @@ const edgeActionHandler = (edgeAction, nodes, edges, setEdges, isDirected, showM
             from: sourceNode.name,
             to: destNode.name
         }
+        addHistory(['add', 'edge', edge]);
         setEdges([...edges, edge]);
         document.getElementById('edge-source').value = '';
         document.getElementById('edge-dest').value = '';
         return true;
     } else {
         let newEdges = [];
+        let toDelete = null;
         edges.forEach(edge => {
             if (!isDirected) {
                 if ((edge.from !== sourceName || edge.to !== destName) && (edge.from !== destName || edge.to !== sourceName)) {
                     newEdges.push(edge);
+                } else {
+                    toDelete = edge;
                 }
             } else {
                 if (edge.from !== sourceName || edge.to !== destName) {
                     newEdges.push(edge);
+                } else {
+                    toDelete = edge;
                 }
             }
         });
@@ -63,6 +69,7 @@ const edgeActionHandler = (edgeAction, nodes, edges, setEdges, isDirected, showM
         } else {
             showMessage('Edge deleted', 'success');
             setEdges(newEdges);
+            addHistory(['delete', 'edge', toDelete]);
             document.getElementById('edge-source').value = '';
             document.getElementById('edge-dest').value = '';
         }

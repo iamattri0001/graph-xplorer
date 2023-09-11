@@ -7,17 +7,14 @@ import { AiOutlineFileText } from 'react-icons/ai';
 import TextInputMenu from './TextInputMenu';
 import Help from './Help';
 import Modal from './Modal';
+import { useGraph } from '../../contexts/GraphProvider';
 
 const RightMenu = ({
     setIsDirected,
     setIsWeighted,
     isWeighted,
     isDirected,
-    nodes,
-    edges,
     showMessage,
-    setNodes,
-    setEdges,
     weightFactor,
 }) => {
     const [lastExec, setLastExec] = useState(2);
@@ -25,6 +22,8 @@ const RightMenu = ({
     const [delay, setDelay] = useState(2);
     const [inputMenuOpen, setInputMenuOpen] = useState(false);
     const [isRightMenuOpen, setIsRightMenuOpen] = useState(true);
+
+    const { nodes, edges, setNodes} = useGraph();
 
     const handleRightShiftDown = (event) => {
         if (event.shiftKey && event.code === 'ShiftRight') {
@@ -74,7 +73,7 @@ const RightMenu = ({
     };
 
     const [isHelpOpen, setIsHelpOpen] = useState(false);
-    
+
     return (
         <>
             <div
@@ -91,7 +90,7 @@ const RightMenu = ({
                         />
                     )}
                 </div>
-                <div className='flex flex-col items-center justify-center gap-y-7'>
+                <div className='flex flex-col items-center justify-center gap-y-5'>
                     <div className='flex flex-col gap-y-2 px-5 py-4 bg-wedgewood-900 w-full rounded-md'>
                         <div
                             onClick={() => {
@@ -184,7 +183,7 @@ const RightMenu = ({
                             Visualize
                         </button>
                     </div>
-                    <div className='flex items-center justify-center gap-x-3 px-5 py-4 bg-wedgewood-900 w-full rounded-md'>
+                    <div className='flex items-center justify-center gap-x-3 px-4 py-3 bg-wedgewood-900 rounded-md'>
                         <button onClick={() => setInputMenuOpen(true)} title='Build from input'>
                             <AiOutlineFileText
                                 className='text-3xl inline text-wedgewood-50 cursor-pointer hover:scale-110 transition-all hover:text-wedgewood-400'
@@ -202,10 +201,6 @@ const RightMenu = ({
             {inputMenuOpen && (
                 <Modal openCloseHandler={setInputMenuOpen} openOrClose={inputMenuOpen}>
                     <TextInputMenu
-                        nodes={nodes}
-                        setNodes={setNodes}
-                        edges={edges}
-                        setEdges={setEdges}
                         setIsDirected={setIsDirected}
                         showMessage={showMessage}
                     />

@@ -1,24 +1,31 @@
+import { showMessage } from "./showMessageHandler";
+
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
-const nodeActionHandler = (nodeAction, nodes, setNodes, edges, setEdges, showMessage, givenName, addHistory) => {
+const nodeActionHandler = (nodeAction, nodes, setNodes, edges, setEdges, xu, givenName, addHistory) => {
     let name;
     if (givenName) {
-        name = givenName;
-        const paddingX = 0.2 * window.innerWidth;
-        const paddingY = 0.15 * window.innerHeight;
-        const node = {
-            name: name,
-            x: getRandomInt(paddingX, window.innerWidth - paddingX),
-            y: getRandomInt(paddingY, window.innerHeight - paddingY)
-        }
+        if (nodeAction === 'Add') {
+            name = givenName;
+            const paddingX = 0.2 * window.innerWidth;
+            const paddingY = 0.15 * window.innerHeight;
+            const node = {
+                name: name,
+                x: getRandomInt(paddingX, window.innerWidth - paddingX),
+                y: getRandomInt(paddingY, window.innerHeight - paddingY)
+            }
 
-        setNodes(prevState => ({
-            ...prevState,
-            [name]: node
-        }));
-        return true;
+            setNodes(prevState => ({
+                ...prevState,
+                [name]: node
+            }));
+            return true;
+        } else {
+            name = givenName;
+            // delete action case, will go to the bottm part of code now
+        }
     } else {
         name = document.getElementById('node-name').value;
     }
@@ -30,9 +37,11 @@ const nodeActionHandler = (nodeAction, nodes, setNodes, edges, setEdges, showMes
             showMessage('Provide a unique name', 'error')
             return;
         }
+        
         document.getElementById('node-name').value = '';
         const paddingX = 0.2 * window.innerWidth;
         const paddingY = 0.15 * window.innerHeight;
+
 
         const node = {
             name: name,
@@ -45,7 +54,7 @@ const nodeActionHandler = (nodeAction, nodes, setNodes, edges, setEdges, showMes
             ...prevState,
             [name]: node
         }));
-        
+
         return true;
     } else {
         if (!nodes[name]) {
@@ -72,7 +81,9 @@ const nodeActionHandler = (nodeAction, nodes, setNodes, edges, setEdges, showMes
 
         setNodes(newNodes);
         setEdges(newEdges);
+        // if (showMessage) {
         showMessage("Deleted vertex '" + name + "' from graph", 'success');
+        // }
     }
 };
 export default nodeActionHandler;

@@ -1,6 +1,6 @@
 import nodeActionHandler from "./nodeActionHandler";
 
-const textInputHandler = (data, nodes, setNodes, setEdges, setIsDirected, showMessage) => {
+const textInputHandler = (data, nodes, setNodes, setEdges, setIsDirected, showMessage, clearHistory) => {
     const showInvalidInput = () => {
         showMessage('Invalid Input', 'error');
         return;
@@ -77,10 +77,11 @@ const textInputHandler = (data, nodes, setNodes, setEdges, setIsDirected, showMe
             }
         }
 
+
         setEdges(newEdges);
         showMessage('Graph Created', 'success');
     }, 2000);
-
+    clearHistory();
 };
 
 

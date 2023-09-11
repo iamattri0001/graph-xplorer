@@ -14,25 +14,18 @@ import { redoActions } from '../../utils/handlers/handleRedo';
 import SaveGraph from './SaveGraph';
 import LoadGraph from './LoadGraph';
 import DeleteGraph from './DeleteGraph';
+import { useGraph } from '../../contexts/GraphProvider';
 
 const LeftMenu = ({
-    nodes,
-    edges,
-    setEdges,
-    setNodes,
     isDirected,
     showMessage,
     setNodeSize,
     nodeSize,
     weightFactor,
     setWeightFactor,
-    addHistory,
-    getHistory,
-    resetHistory,
-    addDeletedHistory,
-    getDeletedHistory
 }) => {
 
+    const { nodes, edges, setNodes, setEdges, getDeletedHistory, addHistory, getHistory, resetHistory } = useGraph();
 
     const [isOpen, setIsOpen] = useState(true);
 
@@ -56,7 +49,7 @@ const LeftMenu = ({
 
     const handleEdgeAction = (event) => {
         event.preventDefault();
-        edgeActionHandler(edgeAction, nodes, edges, setEdges, isDirected, showMessage);
+        edgeActionHandler(edgeAction, nodes, edges, setEdges, isDirected, showMessage, null, null, addHistory);
     }
 
     const handleNodeAction = (event) => {

@@ -1,15 +1,17 @@
 import React from 'react'
 import textInputHandler from './../../utils/handlers/textInputHandler';
+import { useGraph } from '../../contexts/GraphProvider';
 
-const TextInputMenu = ({ nodes, setNodes, setEdges, setIsDirected, showMessage }) => {
+const TextInputMenu = ({ setIsDirected, showMessage }) => {
 
+    const { nodes, setNodes, setEdges, resetHistory} = useGraph();
     const handleBuild = (event) => {
         event.preventDefault();
         const data = document.getElementById('input-data').value;
         if (data !== '')
-            textInputHandler(data, nodes, setNodes, setEdges, setIsDirected, showMessage);
+            textInputHandler(data, nodes, setNodes, setEdges, setIsDirected, showMessage, resetHistory);
     }
-
+    
     return (
         <div className='bg-wedgewood-400 px-4 py-7 flex flex-col items-center justify-center gap-y-3 rounded-md h-[50vh]'>
             <div>

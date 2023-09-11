@@ -4,6 +4,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import toastSettings from './utils/toastSettings';
 import MobilePrompt from './Components/UI/MobilePrompt';
 import { useMediaQuery } from 'react-responsive';
+import { GraphProvider } from './contexts/GraphProvider';
 
 const App = () => {
   const showMessage = (message, type, duration = 3000) => {
@@ -26,7 +27,9 @@ const App = () => {
   return (
     <>
       {isMobile ? <MobilePrompt /> : <>
-        <Home showMessage={showMessage} />
+        <GraphProvider>
+          <Home showMessage={showMessage} />
+        </GraphProvider>
         <Toaster />
       </>}
     </>
