@@ -3,7 +3,7 @@ import { BsLinkedin } from 'react-icons/bs';
 
 const Help = () => {
     return (
-        <div className='w-[80vw] h-[60vh] px-8 flex flex-col items-start gap-y-16 py-8 rounded-md bg-wedgewood-200 overflow-y-auto'>
+        <div className='w-[80vw] h-[60vh] px-8 flex flex-col items-start gap-y-16 py-8 rounded-md bg-wedgewood-300 overflow-y-auto'>
 
             <div className='flex items-start justify-center gap-y-4 flex-col'>
                 <h1 className='text-5xl title-font'>Left Menu</h1>

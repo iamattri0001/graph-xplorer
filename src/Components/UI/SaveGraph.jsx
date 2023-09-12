@@ -15,7 +15,6 @@ const SaveGraph = ({ setIsSaveOpen, isSaveOpen, nodes, edges, allGraphs }) => {
                         showMessage('Provide a name!', 'error');
                         return;
                     }
-
                     saveGraphHandler(nodes, edges, document.getElementById('graph-name').value, allGraphs);
                     showMessage('Saved!', 'success');
                     setIsSaveOpen(false);

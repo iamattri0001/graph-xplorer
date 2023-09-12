@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { algorithms, killAnimation } from './../../utils/graphAlgos';
-import { MdOutlineLiveHelp } from 'react-icons/md';
+import { MdOutlineHelpCenter } from 'react-icons/md';
 import { BsArrowBarLeft } from 'react-icons/bs';
 import { IoCloseOutline } from 'react-icons/io5';
 import { AiOutlineFileText } from 'react-icons/ai';
@@ -191,7 +191,7 @@ const RightMenu = ({
                             />
                         </button>
                         <button onClick={() => setIsHelpOpen(true)}>
-                            <MdOutlineLiveHelp
+                            <MdOutlineHelpCenter
                                 className='text-3xl inline text-wedgewood-50 cursor-pointer hover:scale-110 transition-all hover:text-wedgewood-400'
                                 title='Help'
                             />

@@ -4,6 +4,7 @@ import RightMenu from './UI/RightMenu';
 import Navbar from './UI/Navbar';
 import Graph from './Graph';
 import LeftMenu from './UI/LeftMenu';
+import ContextMenu from './UI/ContextMenu';
 
 const Home = () => {
 
@@ -13,8 +14,25 @@ const Home = () => {
 
     const [weightFactor, setWeightFactor] = useState(1);
 
+    const [contextMenuVisible, setContextMenuVisible] = useState(false);
+    const [contextMenuX, setContextMenuX] = useState(0);
+    const [contextMenuY, setContextMenuY] = useState(0);
+
+    const handleContextMenu = (e) => {
+        e.preventDefault();
+        setContextMenuX(e.pageX);
+        setContextMenuY(e.pageY);
+        setContextMenuVisible(true);
+    }
+
+    const handleCloseContextMenu = () => {
+        setContextMenuVisible(false);
+    };
+
     return (
-        <div className='bg-wedgewood-950 min-h-screen relative md:overflow-hidden flex'>
+        <div
+            className='bg-wedgewood-950 min-h-screen relative md:overflow-hidden flex'
+            onContextMenu={handleContextMenu}>
             <Navbar />
 
             <LeftMenu
@@ -39,6 +57,8 @@ const Home = () => {
                 isWeighted={isWeighted}
                 weightFactor={weightFactor}
             />
+
+            <ContextMenu visible={contextMenuVisible} x={contextMenuX} y={contextMenuY} onClose={handleCloseContextMenu} />
 
         </div>
     );

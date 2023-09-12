@@ -24,7 +24,7 @@ const Modal = ({ openCloseHandler, openOrClose, children }) => {
     return (
         <>
             {openOrClose &&
-                <div className='w-screen absolute h-screen bg-black/70 z-10 flex flex-col gap-y-3 items-center justify-center left-0'>
+                <div className='w-screen fixed h-screen bg-black/80 z-10 flex flex-col gap-y-3 items-center justify-center left-0 top-0'>
                     {children}
                     <div>
                         <button className='btn text-2xl rounded-full p-1' onClick={() => openCloseHandler(false)}><IoCloseOutline /></button>

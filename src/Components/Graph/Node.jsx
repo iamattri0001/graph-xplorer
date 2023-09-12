@@ -15,7 +15,7 @@ const Node = ({ name, x, y, handlePositionChange, nodeSize }) => {
     const [isDeleteActive, setIsDeleteActive] = useState(false);
 
     const deleteIconCordinates = {
-        x: window.innerWidth * 0.82,
+        x: window.innerWidth * 0.85,
         y: window.innerHeight * 0.9
     }
     const handleMouseDown = () => {
@@ -32,7 +32,7 @@ const Node = ({ name, x, y, handlePositionChange, nodeSize }) => {
 
             const dist = Math.sqrt(Math.pow(newX - deleteIconCordinates.x, 2) + Math.pow(newY - deleteIconCordinates.y, 2));
 
-            if (dist <= 35) {
+            if (dist <= 40) {
                 setIsDeleteActive(true);
             } else {
                 setIsDeleteActive(false);
