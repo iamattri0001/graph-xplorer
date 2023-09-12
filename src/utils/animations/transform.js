@@ -1,5 +1,5 @@
 export const duration = {
-    fast: '0.01s',
+    fast: '0.00s',
     slow: '0.3s'
 };
 

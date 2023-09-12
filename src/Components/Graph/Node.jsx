@@ -32,7 +32,7 @@ const Node = ({ name, x, y, handlePositionChange, nodeSize }) => {
 
             const dist = Math.sqrt(Math.pow(newX - deleteIconCordinates.x, 2) + Math.pow(newY - deleteIconCordinates.y, 2));
 
-            if (dist <= 30) {
+            if (dist <= 35) {
                 setIsDeleteActive(true);
             } else {
                 setIsDeleteActive(false);
@@ -43,9 +43,8 @@ const Node = ({ name, x, y, handlePositionChange, nodeSize }) => {
 
         const handleMouseUp = (event) => {
             // event.preventDefault();
-            
+
             if (isDeleteActive) {
-                console.log('delete');
                 nodeActionHandler('Delete', nodes, setNodes, edges, setEdges, name, addHistory);
             }
 
@@ -57,18 +56,31 @@ const Node = ({ name, x, y, handlePositionChange, nodeSize }) => {
             // event.preventDefault();
             if (!isDragging) return;
 
-            setTransitionDuration(duration.fast);
             if (event.touches) {
+                setTransitionDuration(duration.fast);
                 const touch = event.touches[0];
                 const newX = touch.clientX;
                 const newY = touch.clientY;
+
+                const dist = Math.sqrt(Math.pow(newX - deleteIconCordinates.x, 2) + Math.pow(newY - deleteIconCordinates.y, 2));
+
+                if (dist <= 30) {
+                    setIsDeleteActive(true);
+                } else {
+                    setIsDeleteActive(false);
+                }
+
                 handlePositionChange(name, newX, newY);
             }
-            setTransitionDuration(duration.slow);
+            // setTransitionDuration(duration.slow);
         };
 
         const handleTouchEnd = (event) => {
             // event.preventDefault();
+            setTransitionDuration(duration.slow);
+            if (isDeleteActive) {
+                nodeActionHandler('Delete', nodes, setNodes, edges, setEdges, name, addHistory);
+            }
             setIsDragging(false);
         };
 
@@ -95,12 +107,15 @@ const Node = ({ name, x, y, handlePositionChange, nodeSize }) => {
         >
 
             {isDragging &&
-                <g
-                    className='text-5xl'
-                    style={{ ...getTransformStyles(deleteIconCordinates.x, deleteIconCordinates.y, '0.5s') }}>
-                    <AiOutlineDelete className={isDeleteActive ? `text-red-400` : `text-wedgewood-50`} />
+                <g>
+                    <circle cx={deleteIconCordinates.x} cy={deleteIconCordinates.y} r={isDeleteActive ? 45 : 30} strokeWidth={1.4} className={`transition-all ${isDeleteActive ? `stroke-transparent fill-wedgewood-400` : `stroke-white fill-transparent `}`} />
+                    <g transform={`translate(${deleteIconCordinates.x - 20}, ${deleteIconCordinates.y - 20})`}>
+                        <AiOutlineDelete size={40} className='text-wedgewood-50' />
+                    </g>
                 </g>
             }
+
+
 
             <circle
                 className={`node fill-node stroke-wedgewood-100 ${isDragging ? 'cursor-grabbing' : 'cursor-grab'} `}

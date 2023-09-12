@@ -9,7 +9,7 @@ const TextInputMenu = ({ setIsDirected, showMessage }) => {
         event.preventDefault();
         const data = document.getElementById('input-data').value;
         if (data !== '')
-            textInputHandler(data, nodes, setNodes, setEdges, setIsDirected, showMessage, resetHistory);
+            textInputHandler(data, nodes, setNodes, setEdges, setIsDirected, resetHistory);
     }
     
     return (

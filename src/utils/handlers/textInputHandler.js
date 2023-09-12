@@ -2,7 +2,7 @@ import nodeActionHandler from "./nodeActionHandler";
 
 import { showMessage } from "./showMessageHandler";
 
-const textInputHandler = (data, nodes, setNodes, setEdges, setIsDirected, clearHistory) => {
+const textInputHandler = (data, nodes, setNodes, setEdges, setIsDirected, resetHistory) => {
     const showInvalidInput = () => {
         showMessage('Invalid Input', 'error');
         return;
@@ -55,7 +55,7 @@ const textInputHandler = (data, nodes, setNodes, setEdges, setIsDirected, clearH
         setIsDirected(isDirected);
 
         for (let i = 1; i <= numbersArray[0]; i++) {
-            let result = nodeActionHandler('Add', nodes, setNodes, [], setEdges, showMessage, String(i));
+            let result = nodeActionHandler('Add', nodes, setNodes, [], setEdges, String(i));
             if (!result) {
                 setEdges([]);
                 setNodes({});
@@ -83,7 +83,7 @@ const textInputHandler = (data, nodes, setNodes, setEdges, setIsDirected, clearH
         setEdges(newEdges);
         showMessage('Graph Created', 'success');
     }, 2000);
-    clearHistory();
+    resetHistory();
 };
 
 
