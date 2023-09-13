@@ -1,4 +1,4 @@
-import React from 'react'
+import { useEffect } from 'react'
 import Home from './Components/Home'
 import { Toaster } from 'react-hot-toast';
 import MobilePrompt from './Components/UI/MobilePrompt';
@@ -6,6 +6,18 @@ import { useMediaQuery } from 'react-responsive';
 import { GraphProvider } from './contexts/GraphProvider';
 
 const App = () => {
+  useEffect(() => {
+    const preventPullToRefresh = (e) => {
+      e.preventDefault();
+    };
+
+    document.addEventListener('touchmove', preventPullToRefresh, { passive: false });
+
+    return () => {
+      document.removeEventListener('touchmove', preventPullToRefresh);
+    };
+  }, []);
+
   const isMobile = useMediaQuery({ query: '(max-width: 620px)' });
 
   return (
