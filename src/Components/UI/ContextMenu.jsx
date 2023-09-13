@@ -15,6 +15,8 @@ const ContextMenu = ({ visible, x, y, onClose }) => {
 
     const { nodes, setNodes, edges, setEdges, resetHistory } = useGraph();
 
+    const countOfNodes = Object.keys(nodes).length;
+
     const style = {
         position: 'absolute',
         top: `${y}px`,
@@ -32,7 +34,7 @@ const ContextMenu = ({ visible, x, y, onClose }) => {
 
     const menuOptionClasses = 'cursor-pointer hover:bg-wedgewood-600 transition-all w-full px-4';
 
-    const disabledOptionClasses = 'cursor-not-allowed w-full px-4 text-gray-400';
+    const disabledOptionClasses = 'cursor-not-allowed w-full px-4 text-gray-500';
 
     return (
         <div id='context-menu' style={style} className='bg-wedgewood-800 pt-1 pb-2 rounded select-none flex items-center justify-center border border-wedgewood-300 shadow-wedgewood-400'>
@@ -40,33 +42,37 @@ const ContextMenu = ({ visible, x, y, onClose }) => {
             <div className='flex flex-col text-wedgewood-50'>
 
                 <div onClick={() => {
-                    onClose();
-                    randomizeGraphHandler(nodes, setNodes);
-                }} className={menuOptionClasses}>Randomize</div>
+                    if (countOfNodes) {
+                        onClose();
+                        randomizeGraphHandler(nodes, setNodes);
+                    }
+                }} className={countOfNodes ? menuOptionClasses : disabledOptionClasses}>Randomize</div>
 
 
                 <div onClick={(e) => {
-                    setFindOpen(true);
-                }} className={menuOptionClasses}>Find Vertex</div>
+                    if (countOfNodes) setFindOpen(true);
+                }} className={countOfNodes ? menuOptionClasses : disabledOptionClasses}>Find Vertex</div>
 
 
                 <div onClick={() => {
-                    setIsSaveOpen(true);
-                }} className={menuOptionClasses}>Save Graph</div>
+                    if (countOfNodes) setIsSaveOpen(true);
+                }} className={countOfNodes ? menuOptionClasses : disabledOptionClasses}>Save Graph</div>
 
 
                 <div onClick={() => {
-                    resetGraphHandler(setNodes, setEdges);
-                    onClose();
-                }} className={menuOptionClasses}>Reset Graph</div>
+                    if (countOfNodes) {
+                        resetGraphHandler(setNodes, setEdges);
+                        onClose();
+                    }
+                }} className={countOfNodes ? menuOptionClasses : disabledOptionClasses}>Reset Graph</div>
 
 
-                <div onClick={() => { setIsLoadOpen(true) }}
+                <div onClick={() => { if (allGraphs.length) setIsLoadOpen(true) }}
                     className={allGraphs.length ? menuOptionClasses : disabledOptionClasses}>
                     Load saved Graphs
                 </div>
 
-                <div onClick={() => { setIsDeleteOpen(true) }}
+                <div onClick={() => { if (allGraphs.length) setIsDeleteOpen(true) }}
                     className={allGraphs.length ? menuOptionClasses : disabledOptionClasses}>
                     Delete saved graphs
                 </div>

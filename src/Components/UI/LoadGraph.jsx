@@ -13,6 +13,7 @@ const LoadGraph = ({ setIsLoadOpen, isLoadOpen, setEdges, setNodes, allGraphs, r
                 loadGraphHandler(setNodes, setEdges, document.getElementById('selected-name').value, allGraphs);
 
                 showMessage('Graph Loaded!', 'success');
+                setIsLoadOpen(false);
 
             }}>
                 <select className='bg-wedgewood-200 text-wedgewood-950 w-[116px] px-1 py-1 outline-none text-sm cursor-pointer rounded-md' id='selected-name'>
