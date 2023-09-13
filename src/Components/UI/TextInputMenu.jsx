@@ -1,17 +1,25 @@
-import React from 'react'
+import { useEffect, useRef } from 'react'
 import textInputHandler from './../../utils/handlers/textInputHandler';
 import { useGraph } from '../../contexts/GraphProvider';
 
 const TextInputMenu = ({ setIsDirected, showMessage }) => {
 
-    const { nodes, setNodes, setEdges, resetHistory} = useGraph();
+    const { nodes, setNodes, setEdges, resetHistory } = useGraph();
+
+    const inputRef = useRef(null);
+
+    useEffect(() => {
+        if(inputRef.current) {
+            inputRef.current.focus();
+        }
+    },[]);
     const handleBuild = (event) => {
         event.preventDefault();
         const data = document.getElementById('input-data').value;
         if (data !== '')
             textInputHandler(data, nodes, setNodes, setEdges, setIsDirected, resetHistory);
     }
-    
+
     return (
         <div className='bg-wedgewood-400 px-4 py-7 flex flex-col items-center justify-center gap-y-3 rounded-md h-[50vh]'>
             <div>
@@ -20,7 +28,7 @@ const TextInputMenu = ({ setIsDirected, showMessage }) => {
                 <p>Next m lines contain the edges in the from: u v</p>
             </div>
             <form className='flex items-center gap-x-2 justify-center h-full'>
-                <textarea id='input-data' cols={50} rows={8} className='bg-wedgewood-200 border border-wedgewood-500 px-2 py-1 resize-none focus:outline-wedgewood-950' />
+                <textarea ref={inputRef} id='input-data' cols={50} rows={8} className='bg-wedgewood-200 border border-wedgewood-500 px-2 py-1 resize-none focus:outline-wedgewood-950' />
 
                 <div className='flex flex-col items-center justify-center gap-y-4'>
                     <div className='text-sm flex items-center justify-center gap-x-2'>

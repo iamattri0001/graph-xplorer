@@ -1,7 +1,5 @@
 import { useState } from 'react';
 
-import { IoCloseOutline } from 'react-icons/io5';
-import { findNode } from '../../utils/handlers/handleFindNode';
 import { useGraph } from '../../contexts/GraphProvider';
 
 import { randomizeGraphHandler, resetGraphHandler } from '../../utils/handlers/graphHandler';
@@ -37,25 +35,25 @@ const ContextMenu = ({ visible, x, y, onClose }) => {
     const disabledOptionClasses = 'cursor-not-allowed w-full px-4 text-gray-400';
 
     return (
-        <div id='context-menu' style={style} className='bg-wedgewood-800 rounded select-none flex items-center justify-center'>
-            <div className='absolute bg-wedgewood-50 hover:bg-wedgewood-200 transition-all p-[2px] rounded-full top-0 right-0 translate-x-1/2 -translate-y-1/2 cursor-pointer' onClick={onClose}>
-                <IoCloseOutline size={20} />
-            </div>
+        <div id='context-menu' style={style} className='bg-wedgewood-800 pt-1 pb-2 rounded select-none flex items-center justify-center border border-wedgewood-300 shadow-wedgewood-400'>
 
-            <div className='flex flex-col text-wedgewood-50 pb-2'>
+            <div className='flex flex-col text-wedgewood-50'>
 
                 <div onClick={() => {
                     onClose();
                     randomizeGraphHandler(nodes, setNodes);
                 }} className={menuOptionClasses}>Randomize</div>
 
+
                 <div onClick={(e) => {
                     setFindOpen(true);
                 }} className={menuOptionClasses}>Find Vertex</div>
 
+
                 <div onClick={() => {
                     setIsSaveOpen(true);
                 }} className={menuOptionClasses}>Save Graph</div>
+
 
                 <div onClick={() => {
                     resetGraphHandler(setNodes, setEdges);
@@ -67,7 +65,6 @@ const ContextMenu = ({ visible, x, y, onClose }) => {
                     className={allGraphs.length ? menuOptionClasses : disabledOptionClasses}>
                     Load saved Graphs
                 </div>
-
 
                 <div onClick={() => { setIsDeleteOpen(true) }}
                     className={allGraphs.length ? menuOptionClasses : disabledOptionClasses}>
