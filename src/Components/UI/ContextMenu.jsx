@@ -9,6 +9,7 @@ import { randomizeGraphHandler, resetGraphHandler } from '../../utils/handlers/g
 import SaveGraph from './SaveGraph';
 import LoadGraph from './LoadGraph';
 import DeleteGraph from './DeleteGraph';
+import FindNodeMenu from './FindNodeMenu';
 
 
 const ContextMenu = ({ visible, x, y, onClose }) => {
@@ -27,7 +28,7 @@ const ContextMenu = ({ visible, x, y, onClose }) => {
     const [isLoadOpen, setIsLoadOpen] = useState(false);
     const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
-    const [findOpen, setFindOpen] = useState(true);
+    const [findOpen, setFindOpen] = useState(false);
 
     const allGraphs = localStorage.getItem('saved-graphs') ? JSON.parse(localStorage.getItem('saved-graphs')) : [];
 
@@ -36,13 +37,12 @@ const ContextMenu = ({ visible, x, y, onClose }) => {
     const disabledOptionClasses = 'cursor-not-allowed w-full px-4 text-gray-400';
 
     return (
-        <div id='context-menu' style={style} className='bg-wedgewood-800 rounded pt-1 pb-2 select-none'>
+        <div id='context-menu' style={style} className='bg-wedgewood-800 rounded select-none flex items-center justify-center'>
             <div className='absolute bg-wedgewood-50 hover:bg-wedgewood-200 transition-all p-[2px] rounded-full top-0 right-0 translate-x-1/2 -translate-y-1/2 cursor-pointer' onClick={onClose}>
                 <IoCloseOutline size={20} />
             </div>
 
-
-            <div className='flex flex-col gap-y-1 text-wedgewood-50'>
+            <div className='flex flex-col text-wedgewood-50 pb-2'>
 
                 <div onClick={() => {
                     onClose();
@@ -73,6 +73,8 @@ const ContextMenu = ({ visible, x, y, onClose }) => {
                     className={allGraphs.length ? menuOptionClasses : disabledOptionClasses}>
                     Delete saved graphs
                 </div>
+
+
             </div>
 
             {isSaveOpen && <SaveGraph
@@ -96,6 +98,14 @@ const ContextMenu = ({ visible, x, y, onClose }) => {
                 setIsDeleteOpen={setIsDeleteOpen}
                 isDeleteOpen={isDeleteOpen}
                 allGraphs={allGraphs}
+            />}
+
+            {findOpen && <FindNodeMenu
+                findOpen={findOpen}
+                setFindOpen={setFindOpen}
+                onClose={onClose}
+                x={x}
+                y={y}
             />}
 
         </div >

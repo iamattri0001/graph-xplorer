@@ -118,6 +118,7 @@ const Node = ({ name, x, y, handlePositionChange, nodeSize }) => {
 
 
             <circle
+                id={name}
                 className={`node fill-node stroke-wedgewood-100 ${isDragging ? 'cursor-grabbing' : 'cursor-grab'} `}
                 r={20 * nodeSize}
                 // cx={x}

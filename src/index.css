@@ -16,6 +16,35 @@
     animation-iteration-count: infinite;
 }
 
+
+.highlight {
+    animation: highlight;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes highlight {
+
+    0%,
+    20%,
+    40%,
+    60%,
+    80%,
+    100% {
+        fill: red;
+        /* display: none; */
+    }
+
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        fill: white;
+        display: initial;
+    }
+}
+
 @layer components {
     .btn {
         @apply text-sm px-2 py-1 rounded-sm bg-wedgewood-600 hover:bg-wedgewood-800 text-wedgewood-50 transition-all duration-300;
