@@ -20,7 +20,7 @@ const LeftMenu = ({
     setWeightFactor,
 }) => {
 
-    const { nodes, edges, setNodes, setEdges, getDeletedHistory, addHistory, getHistory, resetHistory } = useGraph();
+    const { nodes, edges, setNodes, setEdges, getDeletedHistory, addHistory, getHistory} = useGraph();
 
     const [isOpen, setIsOpen] = useState(true);
 

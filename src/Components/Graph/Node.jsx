@@ -1,146 +1,183 @@
-import React, { useState, useEffect } from 'react';
-import { getTransformStyles, duration } from '../../utils/animations/transform';
-import nodeActionHandler from '../../utils/handlers/nodeActionHandler'
+import React, { useState, useEffect } from "react";
+import { getTransformStyles, duration } from "../../utils/animations/transform";
+import nodeActionHandler from "../../utils/handlers/nodeActionHandler";
 
-import { AiOutlineDelete } from 'react-icons/ai';
-import { useGraph } from '../../contexts/GraphProvider';
-
+import { AiOutlineDelete } from "react-icons/ai";
+import { useGraph } from "../../contexts/GraphProvider";
 
 const Node = ({ name, x, y, handlePositionChange, nodeSize }) => {
-    const { nodes, edges, setEdges, setNodes, addHistory } = useGraph();
+  const { nodes, edges, setEdges, setNodes, addHistory } = useGraph();
 
-    const [isDragging, setIsDragging] = useState(false);
-    const [transitionDuration, setTransitionDuration] = useState(duration.slow);
+  const [isDragging, setIsDragging] = useState(false);
+  const [transitionDuration, setTransitionDuration] = useState(duration.slow);
 
-    const [isDeleteActive, setIsDeleteActive] = useState(false);
+  const [isDeleteActive, setIsDeleteActive] = useState(false);
 
-    const deleteIconCordinates = {
-        x: window.innerWidth * 0.85,
-        y: window.innerHeight * 0.9
-    }
-    const handleMouseDown = () => {
-        setIsDragging(true);
-        setTransitionDuration(duration.fast);
+  const deleteIconCordinates = {
+    x: window.innerWidth * 0.85,
+    y: window.innerHeight * 0.9,
+  };
+  const handleMouseDown = () => {
+    setIsDragging(true);
+    setTransitionDuration(duration.fast);
+  };
+
+  useEffect(() => {
+    const handleMouseMove = (event) => {
+      if (!isDragging) return;
+
+      const newX = event.clientX;
+      const newY = event.clientY;
+
+      const dist = Math.sqrt(
+        Math.pow(newX - deleteIconCordinates.x, 2) +
+          Math.pow(newY - deleteIconCordinates.y, 2)
+      );
+
+      if (dist <= 40) {
+        setIsDeleteActive(true);
+      } else {
+        setIsDeleteActive(false);
+      }
+
+      handlePositionChange(name, newX, newY);
     };
 
-    useEffect(() => {
-        const handleMouseMove = (event) => {
-            if (!isDragging) return;
+    const handleMouseUp = (event) => {
+      // event.preventDefault();
 
-            const newX = event.clientX;
-            const newY = event.clientY;
+      if (isDeleteActive) {
+        nodeActionHandler(
+          "Delete",
+          nodes,
+          setNodes,
+          edges,
+          setEdges,
+          name,
+          addHistory
+        );
+      }
 
-            const dist = Math.sqrt(Math.pow(newX - deleteIconCordinates.x, 2) + Math.pow(newY - deleteIconCordinates.y, 2));
+      setIsDragging(false);
+      setTransitionDuration(duration.slow);
+    };
 
-            if (dist <= 40) {
-                setIsDeleteActive(true);
-            } else {
-                setIsDeleteActive(false);
-            }
+    const handleTouchMove = (event) => {
+      // event.preventDefault();
+      if (!isDragging) return;
 
-            handlePositionChange(name, newX, newY);
-        };
+      if (event.touches) {
+        setTransitionDuration(duration.fast);
+        const touch = event.touches[0];
+        const newX = touch.clientX;
+        const newY = touch.clientY;
 
-        const handleMouseUp = (event) => {
-            // event.preventDefault();
+        const dist = Math.sqrt(
+          Math.pow(newX - deleteIconCordinates.x, 2) +
+            Math.pow(newY - deleteIconCordinates.y, 2)
+        );
 
-            if (isDeleteActive) {
-                nodeActionHandler('Delete', nodes, setNodes, edges, setEdges, name, addHistory);
-            }
+        if (dist <= 30) {
+          setIsDeleteActive(true);
+        } else {
+          setIsDeleteActive(false);
+        }
 
-            setIsDragging(false);
-            setTransitionDuration(duration.slow)
-        };
+        handlePositionChange(name, newX, newY);
+      }
+      // setTransitionDuration(duration.slow);
+    };
 
-        const handleTouchMove = (event) => {
-            // event.preventDefault();
-            if (!isDragging) return;
+    const handleTouchEnd = (event) => {
+      // event.preventDefault();
+      setTransitionDuration(duration.slow);
+      if (isDeleteActive) {
+        nodeActionHandler(
+          "Delete",
+          nodes,
+          setNodes,
+          edges,
+          setEdges,
+          name,
+          addHistory
+        );
+      }
+      setIsDragging(false);
+    };
 
-            if (event.touches) {
-                setTransitionDuration(duration.fast);
-                const touch = event.touches[0];
-                const newX = touch.clientX;
-                const newY = touch.clientY;
+    window.addEventListener("mousemove", handleMouseMove, { passive: false });
+    window.addEventListener("touchmove", handleTouchMove, { passive: false });
+    window.addEventListener("mouseup", handleMouseUp, { passive: false });
+    window.addEventListener("touchend", handleTouchEnd, { passive: false });
 
-                const dist = Math.sqrt(Math.pow(newX - deleteIconCordinates.x, 2) + Math.pow(newY - deleteIconCordinates.y, 2));
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [isDragging, name, handlePositionChange]);
 
-                if (dist <= 30) {
-                    setIsDeleteActive(true);
-                } else {
-                    setIsDeleteActive(false);
-                }
+  const transformStyles = getTransformStyles(x, y, transitionDuration);
 
-                handlePositionChange(name, newX, newY);
-            }
-            // setTransitionDuration(duration.slow);
-        };
+  return (
+    <g
+      onMouseDown={handleMouseDown}
+      onTouchStart={handleMouseDown}
+      className="text-dark"
+    >
+      {isDragging && (
+        <g>
+          <circle
+            cx={deleteIconCordinates.x}
+            cy={deleteIconCordinates.y}
+            r={isDeleteActive ? 45 : 30}
+            strokeWidth={1.4}
+            className={`transition-all ${
+              isDeleteActive
+                ? `stroke-transparent fill-wedgewood-400`
+                : `stroke-white fill-transparent `
+            }`}
+          />
+          <g
+            transform={`translate(${deleteIconCordinates.x - 20}, ${
+              deleteIconCordinates.y - 20
+            })`}
+          >
+            <AiOutlineDelete size={40} className="text-wedgewood-50" />
+          </g>
+        </g>
+      )}
 
-        const handleTouchEnd = (event) => {
-            // event.preventDefault();
-            setTransitionDuration(duration.slow);
-            if (isDeleteActive) {
-                nodeActionHandler('Delete', nodes, setNodes, edges, setEdges, name, addHistory);
-            }
-            setIsDragging(false);
-        };
-
-        window.addEventListener('mousemove', handleMouseMove, { passive: false });
-        window.addEventListener('touchmove', handleTouchMove, { passive: false });
-        window.addEventListener('mouseup', handleMouseUp, { passive: false });
-        window.addEventListener('touchend', handleTouchEnd, { passive: false });
-
-        return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-            window.removeEventListener('touchmove', handleTouchMove);
-            window.removeEventListener('mouseup', handleMouseUp);
-            window.removeEventListener('touchend', handleTouchEnd);
-        };
-    }, [isDragging, name, handlePositionChange]);
-
-    const transformStyles = getTransformStyles(x, y, transitionDuration);
-
-    return (
-        <g
-            onMouseDown={handleMouseDown}
-            onTouchStart={handleMouseDown}
-            className="text-dark"
-        >
-
-            {isDragging &&
-                <g>
-                    <circle cx={deleteIconCordinates.x} cy={deleteIconCordinates.y} r={isDeleteActive ? 45 : 30} strokeWidth={1.4} className={`transition-all ${isDeleteActive ? `stroke-transparent fill-wedgewood-400` : `stroke-white fill-transparent `}`} />
-                    <g transform={`translate(${deleteIconCordinates.x - 20}, ${deleteIconCordinates.y - 20})`}>
-                        <AiOutlineDelete size={40} className='text-wedgewood-50' />
-                    </g>
-                </g>
-            }
-
-
-
-            <circle
-                id={name}
-                className={`node fill-node stroke-wedgewood-100 ${isDragging ? 'cursor-grabbing' : 'cursor-grab'} `}
-                r={20 * nodeSize}
-                // cx={x}
-                // cy={y}
-                strokeWidth={1.5}
-                dataname={name}
-                style={{ ...transformStyles, filter: 'drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3))' }}
-            />
-            <text
-                className={`${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
-                // x={x}
-                // y={y}
-                style={{ ...transformStyles }}
-                textAnchor="middle"
-                dominantBaseline="middle"
-                fill="currentColor"
-                fontSize="19"
-            >
-                {name.slice(0, 4)}
-            </text>
-        </g >
-    );
+      <circle
+        id={name}
+        className={`node fill-node stroke-wedgewood-100 ${
+          isDragging ? "cursor-grabbing" : "cursor-grab"
+        } `}
+        r={20 * nodeSize}
+        // cx={x}
+        // cy={y}
+        strokeWidth={1.5}
+        dataname={name}
+        style={{
+          ...transformStyles,
+          filter: "drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3))",
+        }}
+      />
+      <text
+        className={`${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
+        // x={x}
+        // y={y}
+        style={{ ...transformStyles }}
+        textAnchor="middle"
+        dominantBaseline="middle"
+        fill="currentColor"
+        fontSize="19"
+      >
+        {name.slice(0, 4)}
+      </text>
+    </g>
+  );
 };
 
 export default Node;
