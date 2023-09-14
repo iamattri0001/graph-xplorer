@@ -6,17 +6,6 @@ import { useMediaQuery } from 'react-responsive';
 import { GraphProvider } from './contexts/GraphProvider';
 
 const App = () => {
-  useEffect(() => {
-    const preventPullToRefresh = (e) => {
-      e.preventDefault();
-    };
-
-    document.addEventListener('touchmove', preventPullToRefresh, { passive: false });
-
-    return () => {
-      document.removeEventListener('touchmove', preventPullToRefresh);
-    };
-  }, []);
 
   const isMobile = useMediaQuery({ query: '(max-width: 620px)' });
 

@@ -5,6 +5,11 @@
 @tailwind utilities;
 
 
+/* to disable pull to refresh */
+body {
+    overscroll-behavior-y: contain;
+}
+
 .title-font {
     font-family: 'Orbitron', sans-serif;
 }
