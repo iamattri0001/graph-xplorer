@@ -11,20 +11,22 @@ import { useGraph } from "../../contexts/GraphProvider";
 
 import { showMessage } from "../../utils/handlers/showMessageHandler";
 
-const RightMenu = ({
-  setIsDirected,
-  setIsWeighted,
-  isWeighted,
-  isDirected,
-  weightFactor,
-}) => {
+const RightMenu = ({}) => {
   const [lastExec, setLastExec] = useState(2);
   const [animation, setAnimation] = useState(null);
   const [delay, setDelay] = useState(2);
   const [inputMenuOpen, setInputMenuOpen] = useState(false);
   const [isRightMenuOpen, setIsRightMenuOpen] = useState(true);
 
-  const { nodes, edges, setNodes } = useGraph();
+  const {
+    nodes,
+    edges,
+    setNodes,
+    setIsDirected,
+    setIsWeighted,
+    isWeighted,
+    isDirected,
+  } = useGraph();
 
   const handleRightShiftDown = (event) => {
     if (event.shiftKey && event.code === "ShiftRight") {
@@ -61,7 +63,6 @@ const RightMenu = ({
       isDirected,
       showMessage,
       delay * 1000,
-      weightFactor,
       setNodes
     );
 
@@ -210,6 +211,8 @@ const RightMenu = ({
           <TextInputMenu
             setIsDirected={setIsDirected}
             showMessage={showMessage}
+            setIsWeighted={setIsWeighted}
+            isWeighted={isWeighted}
           />
         </Modal>
       )}

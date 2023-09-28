@@ -27,6 +27,15 @@ const edgeActionHandler = (
   if (sourceName === "" || destName === "") {
     return;
   }
+  const wtValue = document.getElementById("edge-wt").value;
+  let wt = null;
+  if (wtValue !== "") {
+    if (isNaN(Number(wtValue))) {
+      showMessage("Invalid input for weight", "error");
+      return;
+    }
+    wt = Number(wtValue);
+  }
 
   if (edgeAction === "Add") {
     if (sourceName === destName) {
@@ -51,7 +60,9 @@ const edgeActionHandler = (
     const edge = {
       from: sourceNode.name,
       to: destNode.name,
+      weight: wt ? wt : null,
     };
+
     addHistory(["add", "edge", edge]);
     setEdges([...edges, edge]);
     document.getElementById("edge-source").value = "";
@@ -87,6 +98,7 @@ const edgeActionHandler = (
       addHistory(["delete", "edge", toDelete]);
       document.getElementById("edge-source").value = "";
       document.getElementById("edge-dest").value = "";
+      document.getElementById("edge-wt").value = "";
     }
   }
 };

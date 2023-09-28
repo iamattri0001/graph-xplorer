@@ -18,7 +18,6 @@ const dfsAlgo = (nodes, edges, isDirected, showMessage, delay) => {
   let nodesSeq = [];
   let edgesSeq = [];
   dfs(adjList, source, vis, nodesSeq, edgesSeq);
-
   const animation = {
     nodesAnimation: glowNodes(nodesSeq, delay),
     edgesAnimation: highlightPath(edgesSeq, delay, isDirected),

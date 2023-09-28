@@ -5,6 +5,8 @@ const GraphContext = createContext();
 export function GraphProvider({ children }) {
   const [nodes, setNodes] = useState({});
   const [edges, setEdges] = useState([]);
+  const [isDirected, setIsDirected] = useState(false);
+  const [isWeighted, setIsWeighted] = useState(false);
 
   const [history, setHistory] = useState([]);
 
@@ -83,6 +85,10 @@ export function GraphProvider({ children }) {
         getHistory,
         getDeletedHistory,
         resetHistory,
+        isDirected,
+        setIsDirected,
+        isWeighted,
+        setIsWeighted,
       }}
     >
       {children}

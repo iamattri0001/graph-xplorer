@@ -8,10 +8,6 @@ import ContextMenu from "./UI/ContextMenu";
 
 const Home = () => {
   const [nodeSize, setNodeSize] = useState(1.5);
-  const [isDirected, setIsDirected] = useState(false);
-  const [isWeighted, setIsWeighted] = useState(false);
-
-  const [weightFactor, setWeightFactor] = useState(1);
 
   const [contextMenuVisible, setContextMenuVisible] = useState(false);
   const [contextMenuX, setContextMenuX] = useState(0);
@@ -60,28 +56,11 @@ const Home = () => {
     >
       <Navbar />
 
-      <LeftMenu
-        isDirected={isDirected}
-        nodeSize={nodeSize}
-        setNodeSize={setNodeSize}
-        weightFactor={weightFactor}
-        setWeightFactor={setWeightFactor}
-      />
+      <LeftMenu nodeSize={nodeSize} setNodeSize={setNodeSize} />
 
-      <Graph
-        isDirected={isDirected}
-        isWeighted={isWeighted}
-        nodeSize={nodeSize}
-        weightFactor={weightFactor}
-      />
+      <Graph nodeSize={nodeSize} />
 
-      <RightMenu
-        setIsDirected={setIsDirected}
-        setIsWeighted={setIsWeighted}
-        isDirected={isDirected}
-        isWeighted={isWeighted}
-        weightFactor={weightFactor}
-      />
+      <RightMenu />
 
       <div ref={contextMenuRef}>
         <ContextMenu

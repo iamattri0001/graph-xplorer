@@ -15,8 +15,7 @@ const dijsktra = (
   edges,
   isDirected,
   showMessage,
-  delay,
-  weightFactor
+  delay
 ) => {
   let source, dest;
 
@@ -36,7 +35,7 @@ const dijsktra = (
     return;
   }
 
-  const adjList = createWeightedGraph(nodes, edges, isDirected, weightFactor);
+  const adjList = createWeightedGraph(nodes, edges, isDirected);
   const heap = new MinHeap(greaterThan, lessThan);
 
   let dist = {};

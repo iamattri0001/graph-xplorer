@@ -8,7 +8,6 @@ const topoSort = (
   isDirected,
   showMessage,
   delay,
-  weightFactor,
   setNodes
 ) => {
   if (!isDirected && edges.length) {

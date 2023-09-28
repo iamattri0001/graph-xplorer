@@ -124,6 +124,18 @@ body {
   }
 }
 
+.tooltip {
+  display: none;
+  position: absolute;
+  top: 100%;
+  background-color: #323232;
+  color: #c9c9c9;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
 /* not in use */
 .neon-glow {
   stroke: #c04bc8d2;
