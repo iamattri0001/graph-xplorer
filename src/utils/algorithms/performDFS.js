@@ -1,6 +1,6 @@
 import { glowNodes, highlightPath } from "../animate";
 import { createUnweightedGraph } from "./createGraph";
-
+import { createEdgeSeq } from "./sequenceGenerate";
 const dfsAlgo = (nodes, edges, isDirected, showMessage, delay) => {
   let source;
 
@@ -16,9 +16,9 @@ const dfsAlgo = (nodes, edges, isDirected, showMessage, delay) => {
   const adjList = createUnweightedGraph(nodes, edges, isDirected);
   let vis = new Set();
   let nodesSeq = [];
-  let edgesSeq = [];
-  dfs(adjList, source, vis, nodesSeq, edgesSeq);
+  dfs(adjList, source, vis, nodesSeq);
 
+  let edgesSeq = createEdgeSeq(adjList, nodesSeq);
   const animation = {
     nodesAnimation: glowNodes(nodesSeq, delay),
     edgesAnimation: highlightPath(edgesSeq, delay, isDirected),
@@ -27,13 +27,12 @@ const dfsAlgo = (nodes, edges, isDirected, showMessage, delay) => {
   return animation;
 };
 
-const dfs = (adjList, node, vis, nodesSeq, edgesSeq) => {
+const dfs = (adjList, node, vis, nodesSeq) => {
   vis.add(node);
   nodesSeq.push(node);
   adjList[node].forEach((child) => {
     if (!vis.has(child)) {
-      edgesSeq.push({ from: node, to: child });
-      dfs(adjList, child, vis, nodesSeq, edgesSeq);
+      dfs(adjList, child, vis, nodesSeq);
     }
   });
 };

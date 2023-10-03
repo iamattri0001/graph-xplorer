@@ -94,7 +94,7 @@ export const stopFadeEdges = () => {
   });
 };
 
-export const glowNodes = (sequence, delay = 2000) => {
+export const glowNodes = (sequence, delay) => {
   const allNodes = Array.from(document.querySelectorAll(".node"));
   const elementsSequence = [];
   sequence.forEach((node) => {
@@ -124,14 +124,17 @@ export const highlightPath = (sequence, delay = 2000, isDirected) => {
   let allEdges = Array.from(document.querySelectorAll(".edge"));
   let elementsSequence = [];
   sequence.forEach((edge) => {
+    let found = false;
     allEdges.forEach((edgeElement) => {
-      if (areSameEdges(edgeElement, edge, isDirected)) {
+      if (areSameEdges(edgeElement, edge, isDirected) && !found) {
+        found = true;
         elementsSequence.push(edgeElement);
       }
     });
   });
 
   fadeEdges(elementsSequence);
+
   const animation = new sequentialGlow();
   animation.startAnimation(
     elementsSequence,

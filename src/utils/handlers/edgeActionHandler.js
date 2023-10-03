@@ -48,10 +48,13 @@ const edgeActionHandler = (
       showMessage(`'${destName}'  not presnt in graph`, "error");
       return;
     }
+    const weight = document.getElementById("edge-weight");
     const edge = {
       from: sourceNode.name,
       to: destNode.name,
+      weight,
     };
+
     addHistory(["add", "edge", edge]);
     setEdges([...edges, edge]);
     document.getElementById("edge-source").value = "";
