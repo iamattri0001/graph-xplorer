@@ -48,17 +48,29 @@ const edgeActionHandler = (
       showMessage(`'${destName}'  not presnt in graph`, "error");
       return;
     }
-    const weight = document.getElementById("edge-weight");
+    const weightInput = document.getElementById("edge-weight").value;
+    const weight = weightInput ? Number(weightInput) : null;
+    if (weightInput !== "" && isNaN(weight)) {
+      showMessage("Weight must be a number", "error");
+      return;
+    }
+
+    if (weight && weight < 0) {
+      showMessage("Weight must be positive", "error");
+      return;
+    }
+
     const edge = {
       from: sourceNode.name,
       to: destNode.name,
-      weight,
+      weight: weight !== "" ? Number(weight) : null,
     };
 
-    addHistory(["add", "edge", edge]);
+    addHistory([["add", "edge", edge]]);
     setEdges([...edges, edge]);
     document.getElementById("edge-source").value = "";
     document.getElementById("edge-dest").value = "";
+    document.getElementById("edge-weight").value = "";
     return true;
   } else {
     let newEdges = [];
@@ -87,7 +99,7 @@ const edgeActionHandler = (
     } else {
       showMessage("Edge deleted", "success");
       setEdges(newEdges);
-      addHistory(["delete", "edge", toDelete]);
+      addHistory([["delete", "edge", toDelete]]);
       document.getElementById("edge-source").value = "";
       document.getElementById("edge-dest").value = "";
     }

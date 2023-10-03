@@ -5,6 +5,7 @@ export const undoActions = (setNodes, setEdges, getHistory) => {
   }
 
   history.forEach((action) => {
+    console.log(action);
     if (action[0] === "add") {
       if (action[1] === "node") {
         setNodes((prevState) => {
@@ -12,7 +13,7 @@ export const undoActions = (setNodes, setEdges, getHistory) => {
           delete newNodes[action[2].name];
           return newNodes;
         });
-      } else if (action[2] === "edge") {
+      } else if (action[1] === "edge") {
         setEdges((prevState) => {
           let newEdges = prevState.filter((edge) => edge != action[2]);
           return newEdges;
@@ -26,7 +27,7 @@ export const undoActions = (setNodes, setEdges, getHistory) => {
         }));
       } else if (action[1] === "edge") {
         setEdges((prevState) => {
-          let newEdges = prevState;
+          let newEdges = [...prevState];
           newEdges.push(action[2]);
           return newEdges;
         });

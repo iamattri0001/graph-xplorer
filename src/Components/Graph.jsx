@@ -49,13 +49,11 @@ const Graph = ({ isDirected, isWeighted, nodeSize, weightFactor }) => {
               key={i}
               from={{ x: nodes[edge.from].x, y: nodes[edge.from].y }}
               to={{ x: nodes[edge.to].x, y: nodes[edge.to].y }}
-              fromName={edge.from}
-              toName={edge.to}
-              type={edge.type}
               isWeighted={isWeighted}
               isDirected={isDirected}
               nodeSize={nodeSize}
               weightfactor={weightFactor}
+              edge={edge}
             />
           ))}
 

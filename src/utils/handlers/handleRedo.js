@@ -13,7 +13,7 @@ export const redoActions = (setNodes, setEdges, getDeletedHistory) => {
         }));
       } else if (action[1] === "edge") {
         setEdges((prevState) => {
-          let newEdges = prevState;
+          let newEdges = [...prevState];
           newEdges.push(action[2]);
           return newEdges;
         });
