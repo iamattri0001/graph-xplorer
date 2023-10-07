@@ -2,7 +2,7 @@ import React from "react";
 import { PiGraphDuotone } from "react-icons/pi";
 const MobilePrompt = () => {
   return (
-    <div className="bg-wedgewood-950 h-screen flex items-center flex-col justify-center gap-y-5">
+    <div className="h-screen flex items-center flex-col justify-center gap-y-5">
       <h1 className="text-4xl text-center">
         <a
           href="https://github.com/iamattri0001/graph-xplorer"

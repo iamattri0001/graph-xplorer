@@ -3,23 +3,20 @@ import { Toaster } from "react-hot-toast";
 import MobilePrompt from "./Components/UI/MobilePrompt";
 import { useMediaQuery } from "react-responsive";
 import { GraphProvider } from "./contexts/GraphProvider";
+import { Routes, Route } from "react-router-dom";
+import Landing from "./Components/Landing";
 
 const App = () => {
-  const isMobile = useMediaQuery({ query: "(max-width: 620px)" });
-
   return (
-    <>
-      {isMobile ? (
-        <MobilePrompt />
-      ) : (
-        <>
-          <GraphProvider>
-            <Home />
-          </GraphProvider>
-          <Toaster />
-        </>
-      )}
-    </>
+    <div className="canvas min-h-screen">
+      <GraphProvider>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/explore" element={<Home />} />
+        </Routes>
+      </GraphProvider>
+      <Toaster />
+    </div>
   );
 };
 

@@ -9,6 +9,12 @@ body {
   overscroll-behavior-y: contain;
 }
 
+.canvas {
+  background: url('./assets/site.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .title-font {
   font-family: "Orbitron", sans-serif;
 }
@@ -49,7 +55,7 @@ body {
 
 @layer components {
   .btn {
-    @apply text-sm px-2 py-1 rounded-sm bg-wedgewood-600 hover:bg-wedgewood-800 text-wedgewood-50 transition-all duration-300;
+    @apply text-sm border border-transparent hover:border-wedgewood-200 px-2 py-1 rounded-sm bg-wedgewood-600 hover:bg-wedgewood-800 text-wedgewood-50 transition-all duration-300;
   }
 
   .btn-secondary {

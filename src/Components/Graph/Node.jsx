@@ -161,11 +161,13 @@ const Node = ({ name, x, y, handlePositionChange, nodeSize }) => {
         dataname={name}
         style={{
           ...transformStyles,
-          filter: "drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3))",
+          filter: isDragging
+            ? "drop-shadow(1px 3px 28px #4591a1)"
+            : "drop-shadow(1px 3px 10px #4591a1)",
         }}
       />
       <text
-        className={`${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
+        className={`absolute ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
         // x={x}
         // y={y}
         style={{ ...transformStyles }}

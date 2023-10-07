@@ -5,6 +5,8 @@ import Navbar from "./UI/Navbar";
 import Graph from "./Graph";
 import LeftMenu from "./UI/LeftMenu";
 import ContextMenu from "./UI/ContextMenu";
+import { useMediaQuery } from "react-responsive";
+import MobilePrompt from "./UI/MobilePrompt";
 
 const Home = () => {
   const [nodeSize, setNodeSize] = useState(1.5);
@@ -53,9 +55,12 @@ const Home = () => {
     setContextMenuVisible(false);
   };
 
-  return (
+  const isMobile = useMediaQuery({ query: "(max-width: 620px)" });
+  return isMobile ? (
+    <MobilePrompt />
+  ) : (
     <div
-      className="bg-wedgewood-950 min-h-screen relative md:overflow-hidden flex"
+      className="backdrop-blur-sm min-h-screen relative md:overflow-hidden flex select-none"
       onContextMenu={handleContextMenu}
     >
       <Navbar />
