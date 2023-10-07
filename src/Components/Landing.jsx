@@ -1,6 +1,7 @@
 import React from "react";
 import { FaCode } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
+import { Link } from "react-router-dom";
 const Landing = () => {
   return (
     <div className="text-wedgewood-200 items-center justify-center flex flex-col min-h-screen gap-y-10">
@@ -36,12 +37,12 @@ const Landing = () => {
             </li>
           </ul>
           <div className="flex items-center justify-center gap-x-5">
-            <a
-              href="/explore"
+            <Link
+              to="/explore"
               className="btn px-4 py-2 flex items-center justify-center gap-x-2"
             >
               <FaCode /> Xplore
-            </a>
+            </Link>
             <a
               href="https://github.com/iamattri0001/graph-xplorer"
               className="btn-secondary rounded-sm flex items-center justify-center gap-x-2"
@@ -56,13 +57,13 @@ const Landing = () => {
         id="footer"
         className=" backdrop-blur-md w-full flex items-center justify-center py-2"
       >
-        <a
+        <Link
           href="https://www.linkedin.com/in/deepanshu-attri-17a895241/"
           target="_blank"
           className="text-wedgewood-400 hover:text-wedgewood-300"
         >
           @Deepanshu Attri
-        </a>
+        </Link>
       </div>
     </div>
   );
