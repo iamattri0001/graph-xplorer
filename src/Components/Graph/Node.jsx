@@ -161,7 +161,7 @@ const Node = ({ name, x, y, handlePositionChange, nodeSize }) => {
         dataname={name}
         style={{
           ...transformStyles,
-          filter: "drop-shadow(1px 3px 4px #4591a1)",
+          // filter: "drop-shadow(1px 3px 4px #4591a1)",
         }}
       />
       <text

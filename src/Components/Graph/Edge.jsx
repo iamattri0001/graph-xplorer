@@ -22,9 +22,9 @@ const Edge = ({
         x2={to.x} // Calculate the new x2 based on the translation
         y2={to.y} // Calculate the new y2 based on the translation
         strokeWidth={1.3}
-        style={{
-          filter: "drop-shadow(-4px -4px 12px #a14f9a)",
-        }}
+        // style={{
+        //   filter: "drop-shadow(-4px -4px 12px #a14f9a)",
+        // }}
       />
 
       {isWeighted && (
