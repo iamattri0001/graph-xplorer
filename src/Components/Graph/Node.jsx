@@ -5,7 +5,14 @@ import nodeActionHandler from "../../utils/handlers/nodeActionHandler";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useGraph } from "../../contexts/GraphProvider";
 
-const Node = ({ name, x, y, handlePositionChange, nodeSize }) => {
+const Node = ({
+  name,
+  x,
+  y,
+  handlePositionChange,
+  nodeSize,
+  handleContextMenu,
+}) => {
   const { nodes, edges, setEdges, setNodes, addHistory } = useGraph();
 
   const [isDragging, setIsDragging] = useState(false);
@@ -44,8 +51,6 @@ const Node = ({ name, x, y, handlePositionChange, nodeSize }) => {
     };
 
     const handleMouseUp = (event) => {
-      // event.preventDefault();
-
       if (isDeleteActive) {
         nodeActionHandler(
           "Delete",
@@ -63,7 +68,6 @@ const Node = ({ name, x, y, handlePositionChange, nodeSize }) => {
     };
 
     const handleTouchMove = (event) => {
-      // event.preventDefault();
       if (!isDragging) return;
 
       if (event.touches) {
@@ -85,11 +89,9 @@ const Node = ({ name, x, y, handlePositionChange, nodeSize }) => {
 
         handlePositionChange(name, newX, newY);
       }
-      // setTransitionDuration(duration.slow);
     };
 
     const handleTouchEnd = (event) => {
-      // event.preventDefault();
       setTransitionDuration(duration.slow);
       if (isDeleteActive) {
         nodeActionHandler(
@@ -120,11 +122,18 @@ const Node = ({ name, x, y, handlePositionChange, nodeSize }) => {
 
   const transformStyles = getTransformStyles(x, y, transitionDuration);
 
+
+  const color = nodes[name].color;
+
   return (
     <g
       onMouseDown={handleMouseDown}
       onTouchStart={handleMouseDown}
       className="text-dark"
+      onContextMenu={(e) => {
+        e.stopPropagation();
+        handleContextMenu(e, name);
+      }}
     >
       {isDragging && (
         <g>
@@ -151,23 +160,19 @@ const Node = ({ name, x, y, handlePositionChange, nodeSize }) => {
 
       <circle
         id={name}
-        className={`node fill-node stroke-wedgewood-100 ${
+        className={`node ${color ? "" : "fill-node"} stroke-wedgewood-100 ${
           isDragging ? "cursor-grabbing" : "cursor-grab"
         } `}
+        fill={color}
         r={20 * nodeSize}
-        // cx={x}
-        // cy={y}
         strokeWidth={1.5}
         dataname={name}
         style={{
           ...transformStyles,
-          // filter: "drop-shadow(1px 3px 4px #4591a1)",
         }}
       />
       <text
         className={`absolute ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
-        // x={x}
-        // y={y}
         style={{ ...transformStyles }}
         textAnchor="middle"
         dominantBaseline="middle"

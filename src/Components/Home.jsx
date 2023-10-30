@@ -21,9 +21,7 @@ const Home = () => {
 
   const contextMenuRef = useRef(null);
 
-  // Function to handle clicks anywhere on the document
   const handleDocumentClick = (e) => {
-    // Check if the click occurred outside of the context menu
     if (contextMenuRef.current && !contextMenuRef.current.contains(e.target)) {
       handleCloseContextMenu();
     }

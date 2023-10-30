@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import Node from "./Graph/Node";
 import Edge from "./Graph/Edge";
 import { useGraph } from "../contexts/GraphProvider";
+import NodeContextMenu from "./UI/NodeContextMenu";
 
 const Graph = ({ isDirected, isWeighted, nodeSize, weightFactor }) => {
   const { nodes, setNodes, edges, setEdges } = useGraph();
@@ -13,17 +14,6 @@ const Graph = ({ isDirected, isWeighted, nodeSize, weightFactor }) => {
 
       y = Math.max(80, y);
       y = Math.min(y, window.innerHeight - 25);
-      // if (x < 40) {
-      //   x = 40;
-      // } else if (x >= window.innerWidth - 25) {
-      //   x = window.innerWidth - 25;
-      // }
-
-      // if (y < 80) {
-      //   y = 80;
-      // } else if (y >= window.innerHeight - 25) {
-      //   y = window.innerHeight - 25;
-      // }
 
       node.x = x;
       node.y = y;
@@ -57,6 +47,43 @@ const Graph = ({ isDirected, isWeighted, nodeSize, weightFactor }) => {
     }
   }, [nodes, edges]);
 
+  const [contextMenuVisible, setContextMenuVisible] = useState(false);
+  const [contextMenuX, setContextMenuX] = useState(0);
+  const [contextMenuY, setContextMenuY] = useState(0);
+  const [contextTarget, setContextTarget] = useState(null);
+
+  const handleContextMenu = (e, target) => {
+    e.preventDefault();
+    console.log(target);
+    setContextTarget(target);
+    setContextMenuX(e.pageX);
+    setContextMenuY(e.pageY);
+    setContextMenuVisible(true);
+  };
+
+  const handleCloseContextMenu = () => {
+    setContextMenuVisible(false);
+  };
+
+  const contextMenuRef = useRef(null);
+  const handleDocumentClick = (e) => {
+    if (contextMenuRef.current && !contextMenuRef.current.contains(e.target)) {
+      handleCloseContextMenu();
+    }
+  };
+
+  useEffect(() => {
+    if (contextMenuVisible) {
+      document.addEventListener("click", handleDocumentClick);
+    } else {
+      document.removeEventListener("click", handleDocumentClick);
+    }
+
+    return () => {
+      document.removeEventListener("click", handleDocumentClick);
+    };
+  }, [contextMenuVisible]);
+
   return (
     <div className="flex-grow w-screen">
       <svg className="h-full w-full select-none">
@@ -76,6 +103,7 @@ const Graph = ({ isDirected, isWeighted, nodeSize, weightFactor }) => {
 
           {Object.entries(nodes).map(([name, node]) => (
             <Node
+              handleContextMenu={handleContextMenu}
               key={name}
               name={name}
               x={node.x}
@@ -86,6 +114,15 @@ const Graph = ({ isDirected, isWeighted, nodeSize, weightFactor }) => {
           ))}
         </g>
       </svg>
+      <div ref={contextMenuRef}>
+        <NodeContextMenu
+          name={contextTarget}
+          visible={contextMenuVisible}
+          x={contextMenuX}
+          y={contextMenuY}
+          onClose={handleCloseContextMenu}
+        />
+      </div>
     </div>
   );
 };
