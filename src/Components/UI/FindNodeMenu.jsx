@@ -23,7 +23,7 @@ const FindNodeMenu = ({ findOpen, setFindOpen, onClose, x, y }) => {
             type="text"
             id="node-find-name"
             className="bg-transparent outline-none border-b-[1px] border-wedgewood-950 placeholder-wedgewood-600 text-wedgewood-950 px-2"
-            placeholder="Name of the graph"
+            placeholder="Name of the vertex"
             autoComplete="off"
           />
           <button

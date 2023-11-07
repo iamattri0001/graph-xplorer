@@ -189,7 +189,7 @@ const LeftMenu = ({
                 autoComplete="off"
                 onKeyDown={handleKeyDown}
                 ref={sourceInputRef}
-                onClick={() => (focusedRef.current = sourceInputRef.current())}
+                onClick={() => (focusedRef.current = sourceInputRef.current)}
               />
 
               <input

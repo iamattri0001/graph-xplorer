@@ -154,25 +154,20 @@ const Node = ({ name, x, y, handlePositionChange, nodeSize }) => {
         className={`node fill-node stroke-wedgewood-100 ${
           isDragging ? "cursor-grabbing" : "cursor-grab"
         } `}
-        r={20 * nodeSize}
-        // cx={x}
-        // cy={y}
+        r={14 * nodeSize}
         strokeWidth={1.5}
         dataname={name}
         style={{
           ...transformStyles,
-          // filter: "drop-shadow(1px 3px 4px #4591a1)",
         }}
       />
       <text
         className={`absolute ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
-        // x={x}
-        // y={y}
         style={{ ...transformStyles }}
         textAnchor="middle"
         dominantBaseline="middle"
         fill="currentColor"
-        fontSize="19"
+        fontSize="16"
       >
         {name.slice(0, 4)}
       </text>
