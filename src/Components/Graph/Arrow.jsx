@@ -74,7 +74,7 @@ const Arrow = ({ from, to, nodeSize }) => {
   const y1 = from.y;
   const x2 = to.x;
   const y2 = to.y;
-  const distance = nodeSize * 20; //equals the radius of circle of node
+  const distance = nodeSize * 14; //equals the radius of circle of node
   const pointOnLine = calculatePointOnLine(x1, y1, x2, y2, distance);
 
   const pointOfPerpendicular = calculatePointOnLine(
@@ -95,7 +95,7 @@ const Arrow = ({ from, to, nodeSize }) => {
         y1={pointsP[0].y}
         x2={pointOnLine.x}
         y2={pointOnLine.y}
-        strokeWidth={1.3}
+        strokeWidth={3}
       />
       <line
         className="stroke-inherit"
@@ -103,7 +103,7 @@ const Arrow = ({ from, to, nodeSize }) => {
         y1={pointsP[1].y}
         x2={pointOnLine.x}
         y2={pointOnLine.y}
-        strokeWidth={1.3}
+        strokeWidth={3}
       />
     </g>
   );
