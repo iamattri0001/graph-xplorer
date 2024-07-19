@@ -27,11 +27,12 @@ export const createWeightedGraph = (
   });
 
   edges.forEach((edge) => {
+    console.log(edge);
     const { from, to } = edge;
     const fromNode = nodes[from];
     const toNode = nodes[to];
 
-    const weight = Math.ceil(
+    const weight = edge.weight || Math.ceil(
       (Math.sqrt(
         Math.pow(fromNode.x - toNode.x, 2) + Math.pow(fromNode.y - toNode.y, 2)
       ) /
